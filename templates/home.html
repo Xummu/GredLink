@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뉴스</title>
+    <link rel="stylesheet" href="../static/bootstrap-5.3.5-dist/css/bootstrap.min.css">
+    <script src="../static/bootstrap-5.3.5-dist/js/bootstrap.bundle.js"></script>
+</head>
+<body>
+<!--윗 네비-->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+    <a href="#" class="navbar-brand">GredLink</a>
+    <input type="text"  style="width:300px" placeholder="회사 이름 또는 직종을 입력하세요~">
+    <button type="button">검색</button>
+    <ul class="navbar-nav">
+
+    </ul>
+</nav>
+<div class="container-fluid">
+    <div style="margin-top: 80px">
+        <!--뉴스 사진 돌림-->
+        <div id="news_p" class="carousel slide "   data-bs-ride="carousel">
+        <!--hint-->
+        <div class="carousel-indicators" style="margin-top: 80px">
+            <button type="button"  data-bs-target="#news_p" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#news_p"  data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="$news_p"  data-bs-slide-to="2" ></button>
+        </div>
+         <!--사진-->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                 <img src="../static/img/demo1.jpg" alt="" class="d-block" style="height:300px; width: 100%">
+            </div>
+        <div class="carousel-item">
+             <img src="../static/img/demo2.jpg" alt="" class="d-block" style="height:300px; width: 100%">
+        </div>
+        <div class="carousel-item">
+             <img src="../static/img/demo3.jpg" alt="" class="d-block" style="height:300px; width: 100%">
+        </div>
+    </div>
+    <!--좌우 스위치-->
+    <button type="button" class="carousel-control-prev" data-bs-target="#news_p" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button type="button" class="carousel-control-next" data-bs-target="#news_p" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+
+    </div>
+
+        <div class="card" style="margin-top: 20px">
+            <div class="card-body">
+                <h4 class="card-title">뉴스 제목</h4>
+                <p class="card-text">여기에 뉴스내용입니다.</p>
+                <a href="#" class="card-link">첫번째 링크</a>
+                <a href="#" class="card-link">다른 링크</a>
+            </div>
+        </div>
+        <div class="card" style="margin-top: 20px">
+            <div class="card-body">
+                <h4 class="card-title">뉴스 제목2</h4>
+                <p class="card-text">여기에 뉴스내용입니다.</p>
+                <a href="#" class="card-link">첫번째 링크</a>
+                <a href="#" class="card-link">다른 링크</a>
+            </div>
+        </div>
+        <div class="card" style="margin-top: 20px">
+            <div class="card-body">
+                <h4 class="card-title">뉴스 제목3</h4>
+                <p class="card-text">여기에 뉴스내용입니다.</p>
+                <a href="#" class="card-link">첫번째 링크</a>
+                <a href="#" class="card-link">다른 링크</a>
+            </div>
+        </div>
+</div>
+
+
+  <!--아래 내비-->
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-bottom">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a href="home.html" class="nav-link">홈</a>
+            </li>
+             <li class="nav-item">
+                <a href="search.html" class="nav-link">검색</a>
+            </li>
+             <li class="nav-item">
+                <a href="message.html" class="nav-link">채팅</a>
+            </li>
+             <li class="nav-item">
+                <a href="user.html" class="nav-link">My</a>
+            </li>
+        </ul>
+    </nav>
+
+</div>
+
+</body>
+</html>
