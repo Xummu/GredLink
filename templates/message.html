@@ -1,65 +1,170 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat</title>
-    <link rel="stylesheet" href="../static/bootstrap-5.3.5-dist/css/bootstrap.min.css">
-    <script src="../static/bootstrap-5.3.5-dist/js/bootstrap.bundle.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>채팅 페이지</title>
+  <link rel="stylesheet" href="../static/bootstrap-5.3.5-dist/css/bootstrap.min.css" />
+  <script src="../static/bootstrap-5.3.5-dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    body {
+      background-color: #f0e9ee;
+    }
+
+    .top-bar {
+      background-color: white;
+      padding: 10px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 999;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .search-box {
+      background: #f9f9f9;
+      border-radius: 30px;
+      border: 1px solid #ccc;
+      padding: 4px 12px;
+      width: 100%;
+      max-width: 300px;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-box input {
+      border: none;
+      background: transparent;
+      outline: none;
+      flex: 1;
+      padding-left: 6px;
+    }
+
+    .content-wrapper {
+      margin-top: 70px;
+      margin-bottom: 100px;
+    }
+
+    .carousel-container {
+      margin: 1rem 0;
+    }
+
+    .carousel-inner img {
+      height: 200px;
+      object-fit: cover;
+      width: 100%;
+      border-radius: 12px;
+    }
+
+    .news-card {
+      background-color: white;
+      border-radius: 15px;
+      padding: 16px;
+      margin-bottom: 16px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .news-card img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    .news-text p {
+      font-size: 0.85rem;
+      color: #333;
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .news-text a {
+      font-size: 0.8rem;
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      right: 10px;
+      background-color: white;
+      border: 1px solid black;
+      border-radius: 20px;
+      padding: 10px 0;
+      display: flex;
+      justify-content: space-around;
+      z-index: 999;
+    }
+
+    .bottom-nav a {
+      font-size: 0.85rem;
+      color: black;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .bottom-nav img {
+      width: 24px;
+      height: 24px;
+      margin-bottom: 4px;
+    }
+  </style>
 </head>
 <body>
-<!--윗 네비-->
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a href="#" class="nav-link">메시지</a>
-        </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link">+</a>
-        </li>
-    </ul>
-</nav>
-<div class="container-fluid">
-        <div class="card" style="margin-top: 80px">
-            <div class="card-body">
-                <h4 class="card-title">박지성</h4>
-                <p class="card-text">안녕하세요.</p>
-            </div>
-        </div>
-        <div class="card" style="margin-top: 10px">
-            <div class="card-body">
-                <h4 class="card-title">박성빈</h4>
-                <p class="card-text">알고리즘 A+입니다.</p>
-            </div>
-        </div>
-        <div class="card" style="margin-top: 10px">
-            <div class="card-body">
-                <h4 class="card-title">이도길</h4>
-                <p class="card-text">자료구조 A+입니다.</p>
-            </div>
-        </div>
-</div>
+  <div class="top-bar">
+    <img src="../static/img/message_logo.png" alt="로고" height="30" />
+    <div class="search-box">
+      <img src="../static/img/news_search_icon.png" alt="검색" width="16" />
+      <input type="text" placeholder="검색어 입력" />
+    </div>
+  </div>
 
+  <div class="container content-wrapper">
+    <!-- 뉴스 카드 -->
+    <div class="news-card">
+      <img src="../static/img/news_thumb.jpg" alt="썸네일" />
+      <div class="news-text">
+        <p><strong>박성빈</strong><br />알고리즘 A+입니다.</p>
+        <a href="chat.html">자세히 보기</a>
+      </div>
+    </div>
 
-  <!--아래 내비-->
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-bottom">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a href="home.html" class="nav-link">홈</a>
-            </li>
-             <li class="nav-item">
-                <a href="search.html" class="nav-link">검색</a>
-            </li>
-             <li class="nav-item">
-                <a href="message.html" class="nav-link">채팅</a>
-            </li>
-             <li class="nav-item">
-                <a href="user.html" class="nav-link">My</a>
-            </li>
-        </ul>
-    </nav>
+    <div class="news-card">
+      <img src="../static/img/news_thumb.jpg" alt="썸네일" />
+      <div class="news-text">
+        <p><strong>이도길</strong><br />야래야래..................</p>
+        <a href="chat.html">자세히 보기</a>
+      </div>
+    </div>
+  </div>
 
-</div>
-
+  <div class="bottom-nav">
+    <a href="home.html">
+      <img src="../static/img/home.png" alt="홈" />
+      홈
+    </a>
+    <a href="search.html">
+      <img src="../static/img/search.png" alt="검색" />
+      검색
+    </a>
+    <a href="message.html">
+      <img src="../static/img/chat_active.png" alt="채팅" />
+      채팅
+    </a>
+    <a href="user.html">
+      <img src="../static/img/my.png" alt="MY" />
+      MY
+    </a>
+  </div>
 </body>
 </html>
