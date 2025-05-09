@@ -1,35 +1,144 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>채팅</title>
-    <link rel="stylesheet" href="../static/bootstrap-5.3.5-dist/css/bootstrap.min.css">
-    <script src="../static/bootstrap-5.3.5-dist/js/bootstrap.bundle.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>채팅</title>
+  <link rel="stylesheet" href="../static/bootstrap-5.3.5-dist/css/bootstrap.min.css" />
+  <script src="../static/bootstrap-5.3.5-dist/js/bootstrap.bundle.js"></script>
+  <style>
+    body {
+      background-color: #fff;
+      font-family: 'Helvetica', sans-serif;
+    }
+
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: white;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid pink;
+      z-index: 1000;
+    }
+
+    .top-title {
+      text-align: center;
+      flex: 1;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #555;
+    }
+
+    .status {
+      color: #c57384;
+      text-align: center;
+      font-weight: bold;
+      font-size: 0.9rem;
+      margin-top: 0.2rem;
+    }
+
+    .status .dot {
+      color: #16c172;
+      font-size: 1rem;
+      vertical-align: middle;
+    }
+
+    .position-card {
+      background-color: #fff;
+      border: 1px solid #ffe5ee;
+      border-left: 5px solid #c57384;
+      border-radius: 10px;
+      margin: 80px 16px 16px;
+      padding: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .position-card h5 {
+      font-weight: bold;
+      color: #6e3b4c;
+    }
+
+    .chat-box {
+      display: flex;
+      align-items: flex-start;
+      margin: 1rem;
+    }
+
+    .chat-box img {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    .chat-bubble {
+      background-color: #fff;
+      border: 1px solid #ffd9e2;
+      border-radius: 16px;
+      padding: 12px 16px;
+      max-width: 75%;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      font-size: 0.95rem;
+    }
+
+    .chat-input {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #fff;
+      border-top: 1px solid #ffd9e2;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chat-input input {
+      flex: 1;
+      border-radius: 30px;
+      border: none;
+      background-color: #f1f1f1;
+      padding: 10px 16px;
+      font-size: 0.95rem;
+    }
+
+    .chat-input button {
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      color: #666;
+    }
+  </style>
 </head>
 <body>
-<div style="width: 100%; height: 80px;">
-                <div style="margin-top:30px; float:left"><a href="message.html" style="text-decoration: none; color:black"><h1><</h1></a> </div>
-                <div style="margin-top:30px; height:30px;width:35%;float:left"> </div>
-                <div style="margin-top:30px; float:left"><h1>박성빈</h1></div>
- </div>
+  <div class="top-bar">
+    <a href="message.html" style="text-decoration: none; color: black; font-size: 1.5rem;">&lt;</a>
+    <div class="top-title">홍길동</div>
+    <div style="width: 24px;"></div>
+  </div>
 
- <hr style="border: 2px solid pink">
- <div class="card" style="margin-top: 80px">
-            <div class="card-body">
-                <h4 class="card-title">mom's punch</h4>
-                <p class="card-text">mom's punch의 햄보거 엄청 맛있습니다.</p>
-                <a href="search_detail.html" class="card-link">첫번째 링크</a>
-            </div>
- </div>
-<div>
-    <div style="margin-left:20px;margin-top:20px;width: 30px;height: 30px;background-color: pink;float: left"></div>
-    <div style="margin-left:20px;margin-top:10px;float:left;width: 350px;height: 60px; border: 1px solid black;"><p>hello moto!</p></div>
-</div>
+  <div class="position-card">
+    <h5>adibas</h5>
+    <p style="margin: 0; color: #555; font-size: 0.95rem;">글로벌 마케팅 매니저<br><span style="font-size: 0.85rem; color: #888;">D-13 | 경력 | 대졸</span><br><span style="color: #9c3c3c;">💰 시급 10,000-13,000 만원</span></p>
+  </div>
 
-<div style="background-color: pink;height: 70px;" class="fixed-bottom">
-    <input type="text" style="margin-top:10px;margin-left:20px;width: 70%; height: 50px;"><button style="margin-top:10px;margin-left:20px;width: 20%; height: 40px;">sent</button>
-</div>
+  <div class="chat-box">
+    <img src="../static/img/icon.png" alt="프로필">
+    <div class="chat-bubble">
+      안녕하세요. 현재 적합한 인재를 찾고 있습니다.<br>
+      포지션에 관심이 있으시다면 언제든지 지원해 주세요.
+    </div>
+  </div>
 
+  <div class="chat-input">
+    <button>＋</button>
+    <input type="text" placeholder="메시지 보내기" />
+    <button>&#10148;</button>
+  </div>
 </body>
 </html>

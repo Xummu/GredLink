@@ -1,29 +1,147 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인!</title>
-    <link rel="stylesheet" href="../static/bootstrap-5.3.5-dist/css/bootstrap.min.css">
-    <script src="../static/bootstrap-5.3.5-dist/js/bootstrap.bundle.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>로그인</title>
+  <link rel="stylesheet" href="../static/bootstrap-5.3.5-dist/css/bootstrap.min.css" />
+  <script src="../static/bootstrap-5.3.5-dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    body {
+      background-color: #fff;
+      font-family: sans-serif;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .switch-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      border: 1px solid #ccc;
+      border-radius: 30px;
+      padding: 6px 0;
+      margin-bottom: 10px;
+    }
+
+    .switch-links a {
+      color: #333;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .slogan {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #777;
+      margin-top: 6px;
+      font-style: italic;
+    }
+
+    .brand-name {
+      text-align: center;
+      font-family: 'Cursive';
+      color: #f48fb1;
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    .form-box {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .form-input {
+      border: 1px solid pink;
+      border-radius: 15px;
+      padding: 12px;
+      margin-bottom: 16px;
+      width: 100%;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .form-btn {
+      background-color: #ffc1d6;
+      border: none;
+      color: white;
+      font-weight: bold;
+      padding: 12px;
+      border-radius: 15px;
+      width: 100%;
+      margin-bottom: 12px;
+    }
+
+    .options {
+      font-size: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      color: #555;
+      margin-bottom: 24px;
+    }
+
+    .round-icons {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+
+    .round-icons div {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #ccc;
+    }
+
+    .skip-link {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
-    <div>
-        <p><h1>로그인</h1></p>
-        <a href="">개인회원</a>|
-        <a href="">기업회원</a>
-        <form action="">
-            <input type="text" value="ID"/><br/>
-            <input type="text" value="비밀번호"/><br/>
-            <input type="button" value="로그인"/><br/>
-            <input type="checkbox"><p>로그인 유지</p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-        </form>
-        <a href="">아이디 찾기 </a>|<a href=""> 비밀번호 찾기</a>
-        <a href="home.html">暂时跳过</a>
 
+  <h1>로그인</h1>
 
+  <div class="switch-links">
+    <a href="#">개인회원</a>
+    <span>|</span>
+    <a href="#">기업회원</a>
+  </div>
 
+  <div class="slogan">Connecting student to careers, one step at a time.</div>
+  <div class="brand-name">GREDLINK</div>
+
+  <div class="form-box">
+    <input type="text" class="form-input" placeholder="ID" />
+    <input type="password" class="form-input" placeholder="비밀번호" />
+    <button class="form-btn">로그인</button>
+
+    <div class="options">
+      <label><input type="checkbox" /> 로그인 유지</label>
+      <span>
+        <a href="id_serach.html">아이디 찾기</a> |
+        <a href="pass_reset.html">비밀번호 찾기</a>
+      </span>
     </div>
+
+    <div class="round-icons">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <div class="skip-link">
+      <a href="home.html">→ 지금은 건너뛰기</a>
+    </div>
+  </div>
 
 </body>
 </html>

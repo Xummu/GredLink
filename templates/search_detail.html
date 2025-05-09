@@ -1,100 +1,137 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>검색</title>
-    <link rel="stylesheet" href="../static/bootstrap-5.3.5-dist/css/bootstrap.min.css">
-    <script src="../static/bootstrap-5.3.5-dist/js/bootstrap.bundle.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>모집 상세</title>
+  <link rel="stylesheet" href="../static/bootstrap-5.3.5-dist/css/bootstrap.min.css">
+  <script src="../static/bootstrap-5.3.5-dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    body {
+      background-color: #f8f4f6;
+      font-family: 'Helvetica', sans-serif;
+    }
+
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: white;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid #f5a3c7;
+      z-index: 1000;
+    }
+
+    .top-bar h1 {
+      font-size: 24px;
+      margin: 0;
+    }
+
+    .top-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .top-title img {
+      height: 28px;
+    }
+
+    .top-title span {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #444;
+    }
+
+    .container {
+      margin-top: 80px;
+      padding-bottom: 80px;
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      padding: 12px 0 4px;
+      margin-top: 1.5rem;
+    }
+
+    .info-box {
+      background-color: #e7e3e3;
+      border: 2px solid pink;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 1rem;
+    }
+
+    .info-box table {
+      width: 100%;
+      font-size: 0.95rem;
+    }
+
+    .info-box td {
+      padding: 6px 4px;
+      vertical-align: top;
+    }
+
+    .apply-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      background-color: #fdfd96;
+      border: 2px solid pink;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      padding: 12px;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-        <div class="container">
-            <div style="width: 100%; height: 80px;">
-                <div style="margin-top:30px; float:left"><a href="search.html" style="text-decoration: none; color:black"><h1><</h1></a> </div>
-                <div style="margin-top:30px; height:30px;width:25%;float:left"> </div>
-                <div style="margin-top:30px; height:35px;width:35px;background-color: pink; float:left"> </div>
-                <div style="margin-top:30px; float:left"><h1>Mom's punch</h1></div>
-                <div style="margin-top:30px; height:35px;width:35px;background-color: pink; margin-right: 10px; float:right"> </div>
+  <div class="top-bar">
+    <a href="search.html" style="text-decoration: none; color: black;">
+      <h1>&lt;</h1>
+    </a>
+    <div class="top-title">
+      <span>Mom's punch</span>
+    </div>
+    <div style="width: 24px;"></div> <!-- placeholder for spacing -->
+  </div>
 
-            </div>
-             <div style="clear: both"></div>
-            <hr style="border:2px solid pink">
-            <h2>모집단위</h2>
-            <div style="width: 100%; height: 400px; border: 2px solid pink; background-color:#D9D9D9">
-                <table>
-                    <tr>
-                        <td>근무기간</td>
-                        <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
-                        <td>6년이상</td>
-                    </tr>
-                     <tr>
-                        <td>근무요일</td>
-                         <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
-                        <td>요일협의</td>
-                    </tr>
-                     <tr>
-                        <td>근무시간</td>
-                         <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
-                        <td>시간협의</td>
-                    </tr>
-                    <tr>
-                        <td>고용형태</td>
-                        <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
-                        <td>인턴</td>
-                    </tr>
-                    <tr>
-                        <td>복리후생</td>
-                        <td>&nbsp&nbsp&nbsp&nbsp</td>
-                        <td>중식제공,교육비지원,전환가능성있 <br>음,주차지원,지유복장,알고리즘스터<br>디제공</td>
-                    </tr>
-                </table>
-            </div>
-            <h2>기업정보</h2>
-            <div style="width: 100%; height: 300px; border: 2px solid pink; background-color:#D9D9D9">
-                    <table>
-                    <tr>
-                        <td>회사명:</td>
-                        <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
-                        <td>Mom's punch</td>
-                    </tr>
-                     <tr>
-                        <td>업종:</td>
-                         <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
-                        <td>IT/알고리즘 플랫폼 개발</td>
-                    </tr>
-                    <tr>
-                        <td>설립연도:</td>
-                        <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
-                        <td>2017년</td>
-                    </tr>
-                    <tr>
-                        <td>사원수:</td>
-                        <td>&nbsp&nbsp&nbsp&nbsp</td>
-                        <td>22명</td>
-                    </tr>
-                        <tr>
-                        <td>주소:</td>
-                        <td>&nbsp&nbsp&nbsp&nbsp</td>
-                        <td>서울특별시 마이구 백범로 102</td>
-                    </tr>
-                        <tr>
-                        <td>대표자명:</td>
-                        <td>&nbsp&nbsp&nbsp&nbsp</td>
-                        <td>이수연</td>
-                    </tr>
-                </table>
-            </div>
+  <div class="container">
+    <div class="section-title">모집조건</div>
+    <div class="info-box">
+      <table>
+        <tr><td>근무기간</td><td>6년 이상</td></tr>
+        <tr><td>근무요일</td><td>요일협의</td></tr>
+        <tr><td>근무시간</td><td>시간협의</td></tr>
+        <tr><td>고용형태</td><td>인턴</td></tr>
+        <tr><td>복리후생</td><td>중식제공, 교육비지원, 전환가능성 있음, 주차지원, 자유복장, 알고리즘 스터디 제공</td></tr>
+      </table>
+    </div>
 
-            <hr style="border:2px solid pink">
-            <button type="button" style="width: 100%; height: 50px; background-color: #F2FD5C; border: 2px solid pink;">지원하기</button>
+    <div class="section-title">기업정보</div>
+    <div class="info-box">
+      <table>
+        <tr><td>회사명</td><td>Mom's punch</td></tr>
+        <tr><td>업종</td><td>IT / 알고리즘 플랫폼 개발</td></tr>
+        <tr><td>설립연도</td><td>2017년</td></tr>
+        <tr><td>사원수</td><td>22명</td></tr>
+        <tr><td>주소</td><td>서울특별시 마이구 백범로 102</td></tr>
+        <tr><td>대표자명</td><td>이수연</td></tr>
+      </table>
+    </div>
+  </div>
 
-
-        </div>
-
-
-
-
-
+  <a href="chat.html" style="text-decoration: none;color: black">
+      <div class="apply-btn">
+        지원하기
+      </div>
+  </a>
 
 </body>
 </html>

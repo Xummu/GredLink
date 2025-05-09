@@ -1,32 +1,129 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Not Found!</title>
-    <link rel="stylesheet" href="../static/bootstrap-5.3.5-dist/css/bootstrap.min.css">
-    <script src="../static/bootstrap-5.3.5-dist/js/bootstrap.bundle.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 Not Found</title>
+  <link rel="stylesheet" href="../static/bootstrap-5.3.5-dist/css/bootstrap.min.css" />
+  <style>
+    body {
+      background-color: #fff0f5;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .top-bar {
+      background-color: white;
+      padding: 16px;
+      border-bottom: 2px solid pink;
+      display: flex;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .top-bar h5 {
+      flex: 1;
+      text-align: center;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .image-section {
+      padding: 40px 20px 20px;
+      text-align: center;
+    }
+
+    .image-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .image-row img {
+      max-width: 70px;
+      height: auto;
+    }
+
+    .overlay-stack {
+      position: relative;
+      width: 280px;
+      margin: 0 auto;
+    }
+
+    .overlay-stack img {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .bottom-icons {
+      margin-top: 280px;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .bottom-icons img {
+      width: 60px;
+      height: 60px;
+    }
+
+    .text-center p {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .btn-home {
+      background-color: #f8a3c3;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 24px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-<div style="margin-top: 100px">
-    <div><img src="../static/img/fof_3dot.jpg" style="margin-left:40px;margin-top:40px;width:100px; height:30px; float:left" alt=""></div>
-    <div><img src="../static/img/fof_bus.jpg" style="margin-left:20px;width:70px; height:70px; float:left" alt=""></div>
-    <div><img src="../static/img/fof_angry.jpg" style="margin-left:20px;width:70px; height:70px; float:left" alt=""></div>
-    <div style="clear:both"></div>
-    <div style="position: relative">
-        <div><img src="../static/img/fof_xx.jpg" style="position: absolute; width:400px; height:300px;" alt=""></div>
-        <div><img src="../static/img/fof.jpg" style="position: absolute;  width:400px; height:300px;" alt=""></div>
-    </div>
 
-    <div style="clear:both"></div>
-    <div><img src="../static/img/fof_s_2.jpg" style="margin-top:300px;margin-left:40px;width:70px; height:70px; float:left;" alt=""></div>
-    <div><img src="../static/img/fof_s_1.jpg" style="margin-top:300px;margin-left:200px;width:70px; height:70px; float:left;" alt=""></div>
-    <div><img src="../static/img/fof_badge.jpg" style="margin-left:100px;width: 70px;height: 70px" alt=""></div>
-
+<!-- 상단 바 -->
+<div class="top-bar">
+  <a href="home.html" style="text-decoration: none; color: black;"><h5>&lt;</h5></a>
+  <h5>404</h5>
+  <div style="width: 24px;"></div>
 </div>
 
+<!-- 본문 이미지 -->
+<div class="image-section">
+  <div class="image-row">
+    <img src="../static/img/fof_3dot.jpg" alt="...">
+    <img src="../static/img/fof_bus.jpg" alt="bus">
+    <img src="../static/img/fof_angry.jpg" alt="angry">
+  </div>
 
+  <div class="overlay-stack" style="height: 200px;">
+    <img src="../static/img/fof_xx.jpg" alt="XX">
+    <img src="../static/img/fof.jpg" alt="404">
+  </div>
 
+  <div class="bottom-icons">
+    <img src="../static/img/fof_s_2.jpg" alt="tool1">
+    <img src="../static/img/fof_badge.jpg" alt="badge">
+    <img src="../static/img/fof_s_1.jpg" alt="tool2">
+  </div>
+
+  <div class="text-center">
+    <p>페이지를 찾을 수 없습니다<br>홈으로 돌아가 주세요.</p>
+    <a href="home.html" class="btn btn-home mt-2">홈으로 가기</a>
+  </div>
+</div>
 
 </body>
 </html>

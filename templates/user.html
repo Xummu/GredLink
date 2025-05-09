@@ -15,79 +15,58 @@
       background-color: white;
       padding: 10px 16px;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       position: fixed;
       top: 0;
       width: 100%;
       z-index: 999;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    }
-
-    .search-box {
-      background: #f9f9f9;
-      border-radius: 30px;
-      border: 1px solid #ccc;
-      padding: 4px 12px;
-      width: 100%;
-      max-width: 300px;
-      display: flex;
-      align-items: center;
-    }
-
-    .search-box input {
-      border: none;
-      background: transparent;
-      outline: none;
-      flex: 1;
-      padding-left: 6px;
+      border-bottom: 2px solid pink;
     }
 
     .content-wrapper {
-      margin-top: 70px;
+      margin-top: 80px;
       margin-bottom: 100px;
     }
 
-    .carousel-container {
-      margin: 1rem 0;
-    }
-
-    .carousel-inner img {
-      height: 200px;
-      object-fit: cover;
-      width: 100%;
-      border-radius: 12px;
-    }
-
-    .news-card {
-      background-color: white;
+    .profile-card {
+      background-color: #fff0f5;
       border-radius: 15px;
       padding: 16px;
-      margin-bottom: 16px;
       display: flex;
-      gap: 12px;
-      align-items: flex-start;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      margin-bottom: 20px;
     }
 
-    .news-card img {
-      width: 60px;
-      height: 60px;
-      object-fit: cover;
+    .profile-card img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+
+    .menu-card {
+      background-color: white;
       border-radius: 10px;
-      flex-shrink: 0;
-    }
-
-    .news-text p {
-      font-size: 0.85rem;
+      padding: 12px 16px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
       color: #333;
-      margin-bottom: 4px;
-      line-height: 1.3;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     }
 
-    .news-text a {
-      font-size: 0.8rem;
-      color: #007bff;
+    .menu-card:hover {
+      background-color: #fffafc;
+    }
+
+    .menu-card a {
+      color: black;
       text-decoration: none;
+      flex: 1;
     }
 
     .bottom-nav {
@@ -122,71 +101,42 @@
 </head>
 <body>
   <div class="top-bar">
-    <img src="../static/img/my_logo.png" alt="로고" height="30" />
-
+    <h5 class="m-0 fw-bold">마이페이지</h5>
   </div>
 
- <div class="container-fluid" style="margin-top: 80px">
+  <div class="container-fluid content-wrapper">
+    <div class="profile-card">
+      <img src="../static/img/icon.png" alt="프로필" />
+      <div>
+        <div class="fw-bold">닉네임: HelloKitty</div>
+        <div class="text-muted" style="font-size: 0.9rem;">010-8888-8888</div>
+      </div>
+    </div>
 
-        <div class="card">
-            <div class="card-body">
-                <h3>NickName:HelloKitty</h3>
-                <p class="card-text">010-8888-8888</p>
-            </div>
-        </div>
-
-        <div class="card" style="margin-top:10px">
-            <div class="card-body">
-
-                <p class="card-text"><a href="see_post.html" style="text-decoration: none;color: black">최근 본 게시물</a></p>
-            </div>
-        </div>
-        <div class="card" style="margin-top:10px">
-            <div class="card-body" >
-                <p class="card-text">
-                    <a href="like.html" style="text-decoration: none;color: black">즐겨찾기</a></p>
-            </div>
-        </div>
-        <div class="card" style="margin-top:10px">
-            <div class="card-body">
-                <p class="card-text">
-                    <a href="aicv.html" style="text-decoration: none;color: black">AI 이력서</a></p>
-            </div>
-        </div>
-        <div class="card" style="margin-top:10px">
-            <div class="card-body">
-                <p class="card-text">
-                    <a href="sscan.html" style="text-decoration: none;color: black">QR code 스캔</a></p>
-            </div>
-        </div>
-        <div class="card" style="margin-top:10px">
-            <div class="card-body">
-                <p class="card-text">로그아웃</p>
-            </div>
-         </div>
-</div>
-
+    <div class="menu-card mt-3"><a href="see_post.html">👁 최근 본 게시물</a></div>
+    <div class="menu-card"><a href="like.html">💗 즐겨찾기</a></div>
+    <div class="menu-card"><a href="aicv.html">📄 AI 이력서</a></div>
+    <div class="menu-card"><a href="sscan.html">📷 QR 코드 스캔</a></div>
+    <div class="menu-card">🚪 로그아웃</div>
+  </div>
 
   <div class="bottom-nav">
-    <a href="home.html">
+    <a href="home.html" style="text-decoration: none;color: black;font-weight: bold">
       <img src="../static/img/home.png" alt="홈" />
       홈
     </a>
-    <a href="search.html">
+    <a href="search.html" style="text-decoration: none;color: black;font-weight: bold">
       <img src="../static/img/search.png" alt="검색" />
       검색
     </a>
-    <a href="message.html">
+    <a href="message.html" style="text-decoration: none;color: black;font-weight: bold">
       <img src="../static/img/chat.png" alt="채팅" />
       채팅
     </a>
-    <a href="user.html">
+    <a href="user.html" style="text-decoration: none;color: black;font-weight: bold">
       <img src="../static/img/my_active.png" alt="MY" />
       MY
     </a>
   </div>
 </body>
 </html>
-
-
-

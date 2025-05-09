@@ -1,37 +1,133 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>즐겨찾기</title>
-    <link rel="stylesheet" href="../static/bootstrap-5.3.5-dist/css/bootstrap.min.css">
-    <script src="../static/bootstrap-5.3.5-dist/js/bootstrap.bundle.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>즐겨찾기</title>
+  <link rel="stylesheet" href="../static/bootstrap-5.3.5-dist/css/bootstrap.min.css" />
+  <script src="../static/bootstrap-5.3.5-dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    body {
+      background-color: #ffffff;
+      margin: 0;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      padding: 16px;
+      border-bottom: 2px solid pink;
+    }
+
+    .top-bar h4 {
+      flex: 1;
+      text-align: center;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .top-icon {
+      width: 24px;
+      height: 24px;
+      margin-right: 8px;
+    }
+
+    .control-text {
+      font-weight: bold;
+      color: #555;
+    }
+
+    .search-bar {
+      margin: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .search-box {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      padding: 6px 12px;
+      margin-right: 12px;
+    }
+
+    .search-box img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .search-box input {
+      border: none;
+      outline: none;
+      background: transparent;
+      margin-left: 8px;
+      width: 100%;
+    }
+
+    .job-card {
+      background-color: #ffe6f0;
+      border: 1px solid pink;
+      border-radius: 12px;
+      padding: 16px;
+      margin: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .job-card.selected {
+      border: 2px solid #4285f4; /* blue border for selected */
+    }
+
+    .job-info h5 {
+      margin: 0 0 4px 0;
+      font-weight: bold;
+      color: #5c4b4b;
+    }
+
+    .job-info p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    .job-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: white;
+      object-fit: cover;
+    }
+  </style>
 </head>
 <body>
 
- <div style="width: 100%; height: 80px;">
-                <div style="margin-top:30px; float:left"><a href="user.html" style="text-decoration: none; color:black"><h1><</h1></a> </div>
-                <div style="margin-top:30px; height:30px;width:35%;float:left"> </div>
-                <div style="margin-top:30px; height:35px;width:35px;background-color: pink; float:left"> </div>
-                <div style="margin-top:30px; float:left"><h1>즐겨찾기</h1></div>
- </div>
+<!-- 상단 -->
+<div class="top-bar">
+  <a href="user.html" style="text-decoration: none; color: black;"><h4>&lt;</h4></a>
+  <h4>즐겨찾기</h4>
+</div>
+<!-- 즐겨찾기 카드 -->
+<div class="job-card">
+  <div class="job-info">
+    <h5>BrainyPop</h5>
+    <p>인공지능 연구원<br>D-14｜경력｜평균연봉 1억</p>
+  </div>
+  <img src="../static/img/news_thumb.jpg" alt="brainypop" class="job-avatar" />
+</div>
 
- <hr style="border: 2px solid pink">
-
-<div class="container-fluid">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">BrainyPop</h4>
-                <p class="card-text">안녕하세요.</p>
-            </div>
-        </div>
-        <div class="card" style="margin-top: 10px">
-            <div class="card-body">
-                <h4 class="card-title">newbalala</h4>
-                <p class="card-text">알고리즘 A+입니다.</p>
-            </div>
-        </div>
-
+<div class="job-card">
+  <div class="job-info">
+    <h5>newbalala</h5>
+    <p>UX/UI 디자이너<br>D-13｜경력｜연봉 3,000-5,500만원</p>
+  </div>
+  <img src="../static/img/news_thumb.jpg" alt="newbalala" class="job-avatar" />
 </div>
 
 </body>
