@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>로그인</title>
-  <link rel="stylesheet" href="../static/bootstrap-5.3.5-dist/css/bootstrap.min.css" />
-  <script src="../static/bootstrap-5.3.5-dist/js/bootstrap.bundle.min.js"></script>
+ <link rel="stylesheet" href="{{url_for('static',filename='bootstrap-5.3.5-dist/css/bootstrap.min.css')}}">
+    <script src="{{url_for('static',filename='bootstrap-5.3.5-dist/js/bootstrap.bundle.js')}}"></script>
   <style>
     body {
       background-color: #fff;
@@ -119,15 +119,20 @@
   <div class="brand-name">GREDLINK</div>
 
   <div class="form-box">
-    <input type="text" class="form-input" placeholder="ID" />
-    <input type="password" class="form-input" placeholder="비밀번호" />
-    <button class="form-btn">로그인</button>
+      <form method="post" action="{{ url_for('auth.login') }}">
+          <input type="text" name="username" class="form-input" placeholder="ID" />
+    <input type="password" name="password" class="form-input" placeholder="비밀번호" />
+    <button type="submit" class="form-btn">로그인</button>
+
+
+      </form>
+
 
     <div class="options">
       <label><input type="checkbox" /> 로그인 유지</label>
       <span>
-        <a href="id_serach.html">아이디 찾기</a> |
-        <a href="pass_reset.html">비밀번호 찾기</a>
+        <a href="{{ url_for('auth.id_search') }}">아이디 찾기</a> |
+        <a href="{{ url_for('auth.pass_reset') }}">비밀번호 찾기</a>
       </span>
     </div>
 
@@ -139,7 +144,7 @@
     </div>
 
     <div class="skip-link">
-      <a href="home.html">→ 지금은 건너뛰기</a>
+      <a href="{{ url_for('main.home')}}">→ 지금은 건너뛰기</a>
     </div>
   </div>
 

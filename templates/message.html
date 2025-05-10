@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>채팅 페이지</title>
-  <link rel="stylesheet" href="../static/bootstrap-5.3.5-dist/css/bootstrap.min.css" />
-  <script src="../static/bootstrap-5.3.5-dist/js/bootstrap.bundle.min.js"></script>
+ <link rel="stylesheet" href="{{url_for('static',filename='bootstrap-5.3.5-dist/css/bootstrap.min.css')}}">
+    <script src="{{url_for('static',filename='bootstrap-5.3.5-dist/js/bootstrap.bundle.js')}}"></script>
   <style>
     body {
       background-color: #f0e9ee;
@@ -149,20 +149,20 @@
   </div>
 
   <div class="bottom-nav">
-    <a href="home.html" style="text-decoration: none;color: black;font-weight: bold">
-      <img src="../static/img/home.png" alt="홈" />
+    <a href="{{ url_for('main.home') }}" style="text-decoration: none;color: black;font-weight: bold">
+      <img src="{{url_for('static',filename='img/home.png')}}" alt="홈" />
       홈
     </a>
-    <a href="search.html" style="text-decoration: none;color: black;font-weight: bold">
-      <img src="../static/img/search.png" alt="검색" />
+    <a href="{{ url_for('main.search')}}" style="text-decoration: none;color: black;font-weight: bold">
+      <img src="{{url_for('static',filename='img/search.png')}}" alt="검색" />
       검색
     </a>
-    <a href="message.html" style="text-decoration: none;color: black;font-weight: bold">
-      <img src="../static/img/chat_active.png" alt="채팅" />
+    <a href="{{ url_for('main.message')}}" style="text-decoration: none;color: black;font-weight: bold">
+      <img src="{{url_for('static',filename='img/chat_active.png')}}" alt="채팅" />
       채팅
     </a>
-    <a href="user.html" style="text-decoration: none;color: black;font-weight: bold">
-      <img src="../static/img/my.png" alt="MY" />
+    <a href="{{url_for('main.user_profile')}}" style="text-decoration: none;color: black;font-weight: bold">
+      <img src="{{url_for('static',filename='img/my.png')}}" alt="MY" />
       MY
     </a>
   </div>

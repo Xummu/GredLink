@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>404 Not Found</title>
-  <link rel="stylesheet" href="../static/bootstrap-5.3.5-dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="{{url_for('static',filename='bootstrap-5.3.5-dist/css/bootstrap.min.css')}}">
+    <script src="{{url_for('static',filename='bootstrap-5.3.5-dist/js/bootstrap.bundle.js')}}"></script>
   <style>
     body {
       background-color: #fff0f5;
@@ -95,7 +96,7 @@
 
 <!-- 상단 바 -->
 <div class="top-bar">
-  <a href="home.html" style="text-decoration: none; color: black;"><h5>&lt;</h5></a>
+  <a href="{{url_for('main.home')}}" style="text-decoration: none; color: black;"><h5>&lt;</h5></a>
   <h5>404</h5>
   <div style="width: 24px;"></div>
 </div>
@@ -103,25 +104,25 @@
 <!-- 본문 이미지 -->
 <div class="image-section">
   <div class="image-row">
-    <img src="../static/img/fof_3dot.jpg" alt="...">
-    <img src="../static/img/fof_bus.jpg" alt="bus">
-    <img src="../static/img/fof_angry.jpg" alt="angry">
+    <img src="{{url_for('static',filename='img/fof_3dot.jpg')}}" alt="...">
+    <img src="{{url_for('static',filename='img/fof_bus.jpg')}}" alt="bus">
+    <img src="{{url_for('static',filename='img/fof_angry.jpg')}}" alt="angry">
   </div>
 
   <div class="overlay-stack" style="height: 200px;">
-    <img src="../static/img/fof_xx.jpg" alt="XX">
-    <img src="../static/img/fof.jpg" alt="404">
+    <img src="{{url_for('static',filename='img/fof_xx.jpg')}}" alt="XX">
+    <img src="{{url_for('static',filename='img/fof.jpg')}}" alt="404">
   </div>
 
   <div class="bottom-icons">
-    <img src="../static/img/fof_s_2.jpg" alt="tool1">
-    <img src="../static/img/fof_badge.jpg" alt="badge">
-    <img src="../static/img/fof_s_1.jpg" alt="tool2">
+    <img src="{{url_for('static',filename='img/fof_s_2.jpg')}}" alt="tool1">
+    <img src="{{url_for('static',filename='img/fof_badge.jpg')}}" alt="badge">
+    <img src="{{url_for('static',filename='img/fof_s_1.jpg')}}" alt="tool2">
   </div>
 
   <div class="text-center">
     <p>페이지를 찾을 수 없습니다<br>홈으로 돌아가 주세요.</p>
-    <a href="home.html" class="btn btn-home mt-2">홈으로 가기</a>
+    <a href="{{url_for('main.home')}}" class="btn btn-home mt-2">홈으로 가기</a>
   </div>
 </div>
 

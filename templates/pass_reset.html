@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>비밀번호 재설정</title>
-  <link rel="stylesheet" href="../static/bootstrap-5.3.5-dist/css/bootstrap.min.css" />
-  <script src="../static/bootstrap-5.3.5-dist/js/bootstrap.bundle.min.js"></script>
+ <link rel="stylesheet" href="{{url_for('static',filename='bootstrap-5.3.5-dist/css/bootstrap.min.css')}}">
+    <script src="{{url_for('static',filename='bootstrap-5.3.5-dist/js/bootstrap.bundle.js')}}"></script>
   <style>
     body {
       background-color: #fff0f5;
@@ -78,7 +78,7 @@
 
 <!-- 상단 -->
 <div class="top-bar">
-  <a href="login.html" style="text-decoration: none; color: black;"><h5>&lt;</h5></a>
+  <a href="{{url_for('auth.login')}}" style="text-decoration: none; color: black;"><h5>&lt;</h5></a>
   <h5>비밀번호 재설정</h5>
   <div style="width: 24px;"></div>
 </div>
