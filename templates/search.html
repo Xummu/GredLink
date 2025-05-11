@@ -122,9 +122,9 @@
 </head>
 <body>
   <div class="top-bar">
-    <img src="../static/img/search_logo.png" alt="로고" height="30" />
+    <img src="{{url_for('static',filename='img/search_logo.png')}}" alt="로고" height="30" />
     <div class="search-box">
-      <img src="../static/img/news_search_icon.png" alt="검색" width="16" />
+      <img src="{{url_for('static',filename='img/news_search_icon.png')}}" alt="검색" width="16" />
       <input type="text" placeholder="검색어 입력" />
     </div>
   </div>
@@ -132,18 +132,18 @@
   <div class="container content-wrapper">
     <!-- 공고 카드 -->
     <div class="news-card">
-      <img src="../static/img/news_thumb.jpg" alt="썸네일" />
+      <img src="{{url_for('static',filename='img/news_thumb.jpg')}}" alt="썸네일" />
       <div class="news-text">
         <p><strong>Mon's punch</strong><br />Mon's punch 햄버거 맛있습니다...</p>
-        <a href="search_detail.html">자세히 보기</a>
+        <a href="{{ url_for('main.search_detail') }}">자세히 보기</a>
       </div>
     </div>
 
     <div class="news-card">
-      <img src="../static/img/news_thumb.jpg" alt="썸네일" />
+      <img src="{{url_for('static',filename='img/news_thumb.jpg')}}" alt="썸네일" />
       <div class="news-text">
         <p><strong>adibas</strong><br />친환경 플라스틱으로 만든 제품을 체험해보세요...</p>
-        <a href="search_detail.html">자세히 보기</a>
+        <a href="{{ url_for('main.search_detail') }}">자세히 보기</a>
       </div>
     </div>
   </div>

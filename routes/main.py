@@ -11,6 +11,10 @@ def index():
 def home():
     return render_template('home.html')
 
+@main_bp.route('/home/new_detail')
+def new_detail():
+    return render_template('new_detail.html')
+
 @main_bp.route('/user')
 @login_required
 def user_profile():
@@ -43,3 +47,6 @@ def message():
 def search():
     return render_template('search.html')
 
+@main_bp.route('/search/search_detail')
+def search_detail():
+    return render_template('search_detail.html')

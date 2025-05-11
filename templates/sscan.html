@@ -81,7 +81,7 @@
 
 <!-- 상단바 -->
 <div class="top-bar">
-  <a href="user.html" style="text-decoration: none; color: black;"><h5>&lt;</h5></a>
+  <a href="{{ url_for('main.user_profile') }}" style="text-decoration: none; color: black;"><h5>&lt;</h5></a>
   <h5>QR 코드 스캔</h5>
   <div style="width: 24px;"></div>
 </div>
@@ -94,11 +94,11 @@
 <!-- 액션 버튼 -->
 <div class="action-buttons">
   <div class="btn-box">
-    <img src="../static/img/chat_active.png" alt="프로필" />
+    <img src="{{url_for('static',filename='img/chat_active.png')}}" alt="프로필" />
     프로필
   </div>
   <div class="btn-box">
-    <img src="../static/img/home_active.png" alt="앨범" />
+    <img src="{{url_for('static',filename='img/home_active.png')}}" alt="앨범" />
     앨범
   </div>
 </div>

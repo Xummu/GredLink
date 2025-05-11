@@ -27,6 +27,11 @@ def logout():
     logout_user()
     return redirect(url_for('auth.login'))
 
+@auth_bp.route('/chat')
+@login_required
+def chat():
+    return render_template('chat.html')
+
 @auth_bp.route('/id_search', methods=['GET', 'POST'])
 def id_search():
     if request.method == 'POST':

@@ -89,7 +89,7 @@
 <body>
   <!-- 상단 바 -->
   <div class="top-bar">
-    <a href="home.html" style="text-decoration: none; color: black;">
+    <a href="{{url_for('main.home')}}" style="text-decoration: none; color: black;">
       <h1>&lt;</h1>
     </a>
   </div>
@@ -102,13 +102,13 @@
 
     <div class="meta">
       <div class="d-flex align-items-center">
-        <img src="../static/img/icon.png" alt="작성자 아이콘">
+        <img src="{{url_for('static',filename='img/icon.png')}}" alt="작성자 아이콘">
         <p>이지은<br>2025년 05월 02일 20:19</p>
       </div>
       <div class="icons d-flex align-items-center">
-          <img src="../static/img/like.png" alt="좋아요">
-          <img src="../static/img/unlike.png" alt="싫어요">
-          <img src="../static/img/script.png" alt="댓글">
+          <img src="{{url_for('static',filename='img/like.png')}}" alt="좋아요">
+          <img src="{{url_for('static',filename='img/unlike.png')}}" alt="싫어요">
+          <img src="{{url_for('static',filename='img/script.png')}}" alt="댓글">
 
       </div>
     </div>
@@ -119,7 +119,7 @@
         특히 신입 졸업생들에게도 파격적인 연봉 조건을 제시하며 인재 확보에 나서고 있는 상황이다.
         일부 기업은 연 1억 원 이상의 연봉을 제안했으며, 이는 업계 평균보다 훨씬 높은 수준이다.
       </p>
-      <img src="../static/img/demo1.jpg" class="news-image" alt="뉴스 관련 이미지">
+      <img src="{{url_for('static',filename='img/demo1.jpg')}}" class="news-image" alt="뉴스 관련 이미지">
       <p>
         기업 관계자에 따르면 “기술 역량뿐 아니라 문제 해결 능력, 협업 태도, 학습 잠재력까지 종합적으로 평가하는 새로운 인재 기준이 생기고 있다”고 전했다.
         이에 따라, 대학 졸업생이나 경력 초기 단계의 개발자들 사이에서도 실무 프로젝트 경험과 AI 관련 포트폴리오의 중요성이 날로 커지고 있다.

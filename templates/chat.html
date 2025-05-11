@@ -117,7 +117,7 @@
 </head>
 <body>
   <div class="top-bar">
-    <a href="message.html" style="text-decoration: none; color: black; font-size: 1.5rem;">&lt;</a>
+    <a href="{{ url_for('main.massage') }}" style="text-decoration: none; color: black; font-size: 1.5rem;">&lt;</a>
     <div class="top-title">홍길동</div>
     <div style="width: 24px;"></div>
   </div>
@@ -128,7 +128,7 @@
   </div>
 
   <div class="chat-box">
-    <img src="../static/img/icon.png" alt="프로필">
+    <img src="{{url_for('static',filename='img/icon.png')}}" alt="프로필">
     <div class="chat-bubble">
       안녕하세요. 현재 적합한 인재를 찾고 있습니다.<br>
       포지션에 관심이 있으시다면 언제든지 지원해 주세요.

@@ -93,7 +93,7 @@
 </head>
 <body>
   <div class="top-bar">
-    <a href="search.html" style="text-decoration: none; color: black;">
+    <a href="{{ url_for('main.search') }}" style="text-decoration: none; color: black;">
       <h1>&lt;</h1>
     </a>
     <div class="top-title">
@@ -127,7 +127,7 @@
     </div>
   </div>
 
-  <a href="chat.html" style="text-decoration: none;color: black">
+  <a href="{{ url_for('auth.chat') }}" style="text-decoration: none;color: black">
       <div class="apply-btn">
         지원하기
       </div>

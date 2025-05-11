@@ -81,7 +81,7 @@
 
   <!-- 상단 바 -->
   <div class="top-bar">
-    <a href="user.html" style="text-decoration: none; color: black;"><h4>&lt;</h4></a>
+    <a href="{{ url_for('main.user_profile') }}" style="text-decoration: none; color: black;"><h4>&lt;</h4></a>
     <h4>최근 본 게시물</h4>
     <div style="width: 24px;"></div> <!-- 对齐用空元素 -->
   </div>
@@ -99,17 +99,17 @@
 
   <!-- 카드 목록 -->
   <div class="post-card">
-    <img src="../static/img/news_thumb.jpg" alt="adibas" />
+    <img src="{{url_for('static',filename='img/news_thumb.jpg')}}" alt="adibas" />
     <h5>adibas</h5>
   </div>
 
   <div class="post-card">
-    <img src="../static/img/news_thumb.jpg" alt="mom's punch" />
+    <img src="{{url_for('static',filename='img/news_thumb.jpg')}}" alt="mom's punch" />
     <h5>mom's punch</h5>
   </div>
 
   <div class="post-card">
-    <img src="../static/img/news_thumb.jpg" alt="newbalala" />
+    <img src="{{url_for('static',filename='img/news_thumb.jpg')}}" alt="newbalala" />
     <h5>newbalala</h5>
   </div>
 

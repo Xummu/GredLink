@@ -107,7 +107,7 @@
 
 <!-- 상단 바 -->
 <div class="top-bar">
-  <a href="user.html" style="text-decoration: none; color: black;"><h4>&lt;</h4></a>
+  <a href="{{ url_for('main.user_profile') }}" style="text-decoration: none; color: black;"><h4>&lt;</h4></a>
   <h4>AI 이력서</h4>
   <div style="width: 24px;"></div>
 </div>
@@ -125,7 +125,7 @@
 </div>
 
 <div class="resume-section">
-  <img src="../static/img/cv_sample.jpg" alt="이력서 썸네일" />
+  <img src="{{url_for('static',filename='img/cv_sample.jpg')}}" alt="이력서 썸네일" />
   <div class="resume-title">제목 없음 이력서</div>
 </div>
 
