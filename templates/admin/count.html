@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>관리자 대시보드</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.5-dist/css/bootstrap.min.css') }}">
+  <script src="{{ url_for('static', filename='bootstrap-5.3.5-dist/js/bootstrap.bundle.js') }}"></script>
+  <style>
+    .top-bar {
+      background-color: white;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      border-bottom: 2px solid pink;
+    }
+    .stat-box {
+      background-color: #ffe6f0;
+      border: 1px solid pink;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+      text-align: center;
+    }
+    .stat-box h3 {
+      margin: 0;
+      font-size: 2rem;
+      color: #333;
+    }
+    .stat-box p {
+      margin: 0;
+      color: #777;
+    }
+  </style>
+</head>
+<body class="container mt-4">
+
+  <!-- 상단 바 -->
+  <div class="top-bar">
+    <a href="{{ url_for('admin.dashboard') }}" style="text-decoration: none; color: black;"><h4 class="m-0">&lt;</h4></a>
+    <h4 class="mx-auto mb-0">통계</h4>
+    <div style="width:24px;"></div>
+  </div>
+
+  <!-- 통계 박스 -->
+  <div class="stat-box">
+    <h3>{{ user_count }}</h3>
+    <p>등록된 사용자 수</p>
+  </div>
+
+  <div class="stat-box">
+    <h3>{{ visit_count }}</h3>
+    <p>방문 수</p>
+  </div>
+
+</body>
+</html>

@@ -1,5 +1,5 @@
 from flask import Blueprint,render_template,request,redirect,url_for,flash
-from flask_login import login_user,logout_user,login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from extensions import db
 from models.user import User
 
@@ -13,9 +13,16 @@ def login():
         password = request.form['password']
         user = User.query.filter_by(username=username).first()
 
-        if user and user.check_password(password):
+        if user and not user.is_delete and user.check_password(password):
             login_user(user)
-            return redirect(url_for('main.home'))
+
+            #根据身份跳转
+            if user.role == 'admin':
+                return redirect(url_for('admin.dashboard'))
+            elif user.role == 'buser':
+                return redirect(url_for('buser.dashboard'))
+            else:
+                return redirect(url_for('main.home',role=current_user.role))
 
         flash('아이디 또는 비밀번호가 틀렸습니다.','danger')
 

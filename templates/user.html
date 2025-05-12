@@ -106,7 +106,7 @@
 
   <div class="container-fluid content-wrapper">
     <div class="profile-card">
-      <img src="{{url_for('static',filename='img/icon.png')}}" alt="프로필" />
+      <img src="{{url_for('static',filename='current_user.avatar or img/icon.png')}}" alt="프로필" />
       <div>
         <div class="fw-bold">닉네임: HelloKitty</div>
         <div class="text-muted" style="font-size: 0.9rem;">010-8888-8888</div>
@@ -125,18 +125,40 @@
       <img src="{{url_for('static',filename='img/home.png')}}" alt="홈" />
       홈
     </a>
-    <a href="{{ url_for('main.search')}}" style="text-decoration: none;color: black;font-weight: bold">
-      <img src="{{url_for('static',filename='img/search.png')}}" alt="검색" />
-      검색
-    </a>
-    <a href="{{ url_for('main.message')}}" style="text-decoration: none;color: black;font-weight: bold">
-      <img src="{{url_for('static',filename='img/chat.png')}}" alt="채팅" />
-      채팅
-    </a>
-    <a href="{{url_for('main.user_profile')}}" style="text-decoration: none;color: black;font-weight: bold">
-      <img src="{{url_for('static',filename='img/my_active.png')}}" alt="MY" />
-      MY
-    </a>
+     {% if role == 'admin' %}
+          <a href="#" style="text-decoration: none;color: black;font-weight: bold">
+              <img src="{{url_for('static',filename='img/search.png')}}" alt="금지" />금지
+          </a>
+          <a href="#" style="text-decoration: none;color: black;font-weight: bold">
+          <img src="{{url_for('static',filename='img/chat.png')}}" alt="금지" />금지
+          </a>
+     {% else %}
+         <a href="{{ url_for('main.search')}}" style="text-decoration: none;color: black;font-weight: bold">
+              <img src="{{url_for('static',filename='img/search.png')}}" alt="검색" />검색
+          </a>
+          <a href="{{ url_for('main.message')}}" style="text-decoration: none;color: black;font-weight: bold">
+          <img src="{{url_for('static',filename='img/chat.png')}}" alt="채팅" />채팅
+          </a>
+     {% endif %}
+
+     {% if role == 'admin' %}
+        <a href="{{url_for('admin.dashboard')}}" style="text-decoration: none;color: black;font-weight: bold">
+        <img src="{{url_for('static',filename='img/my_active.png')}}" alt="MY" />
+        MY
+        </a>
+
+     {% elif role == 'buser' %}
+        <a href="{{url_for('main.user_profile')}}" style="text-decoration: none;color: black;font-weight: bold">
+        <img src="{{url_for('static',filename='img/my_active.png')}}" alt="MY" />
+        MY
+        </a>
+     {% else %}
+        <a href="{{url_for('main.user_profile')}}" style="text-decoration: none;color: black;font-weight: bold">
+        <img src="{{url_for('static',filename='img/my_active.png')}}" alt="MY" />
+        MY
+        </a>
+     {% endif %}
+
   </div>
 </body>
 </html>

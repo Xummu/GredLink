@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>내 정보 수정</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.5-dist/css/bootstrap.min.css') }}">
+  <script src="{{ url_for('static', filename='bootstrap-5.3.5-dist/js/bootstrap.bundle.js') }}"></script>
+  <style>
+    body {
+      background-color: #fff;
+      padding-bottom: 100px;
+    }
+    .top-bar {
+      background-color: white;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      border-bottom: 2px solid pink;
+    }
+    .top-bar h4 {
+      flex-grow: 1;
+      text-align: center;
+      margin: 0;
+    }
+    .avatar-preview {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #ccc;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a href="{{ url_for('main.home') }}" class="text-decoration-none text-dark"><h4>&lt;</h4></a>
+  <h4>프로필 수정</h4>
+  <div style="width:24px;"></div>
+</div>
+
+<div class="container mt-4">
+  <form method="POST" enctype="multipart/form-data" action="{{ url_for('main.profile_edit') }}">
+    <div class="text-center">
+      <img src="{{ url_for('static', filename=current_user.avatar or 'img/icon.png') }}" alt="프로필 이미지" class="avatar-preview">
+      <div class="mb-3">
+        <input type="file" name="avatar" accept="image/*" class="form-control">
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label>아이디 (수정 불가)</label>
+      <input type="text" class="form-control" value="{{ current_user.username }}" disabled>
+    </div>
+
+    <div class="mb-3">
+      <label>이름</label>
+      <input type="text" name="real_name" value="{{ current_user.real_name or '' }}" class="form-control">
+    </div>
+
+    <div class="mb-3">
+      <label>이메일</label>
+      <input type="email" name="email" value="{{ current_user.email or '' }}" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">저장하기</button>
+  </form>
+</div>
+
+</body>
+</html>

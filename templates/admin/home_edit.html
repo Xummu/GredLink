@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>홈 수정</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.5-dist/css/bootstrap.min.css') }}">
+  <script src="{{ url_for('static', filename='bootstrap-5.3.5-dist/js/bootstrap.bundle.js') }}"></script>
+  <style>
+    body {
+      background-color: #fff;
+      padding-bottom: 100px;
+    }
+    .top-bar {
+      background-color: white;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      border-bottom: 2px solid pink;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+    .top-bar h4 {
+      flex-grow: 1;
+      text-align: center;
+      margin: 0;
+    }
+    .card img {
+      height: 200px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a href="{{ url_for('admin.dashboard') }}" class="text-decoration-none text-dark"><h4>&lt;</h4></a>
+  <h4>홈 수정</h4>
+  <div style="width:24px;"></div>
+</div>
+
+<div class="container mt-4">
+  <form method="POST" enctype="multipart/form-data" action="{{ url_for('admin.home_edit') }}">
+    <div class="mb-3">
+      <label class="form-label">제목</label>
+      <input type="text" name="caption" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">링크 (선택)</label>
+      <input type="url" name="link" class="form-control">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">이미지 업로드</label>
+      <input type="file" name="image" accept="image/*" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary w-100">이미지 추가</button>
+  </form>
+
+  <hr>
+
+ <h5 class="mb-3">현재 이미지 목록</h5>
+
+{% if images %}
+<div class="row">
+  {% for item in images %}
+  <div class="col-12 col-md-6 mb-4">
+    <div class="card">
+      <img src="{{ url_for('static', filename=item.image_path) }}" class="card-img-top" alt="슬라이드 이미지">
+      <div class="card-body">
+        <h5 class="card-title">{{ item.caption }}</h5>
+        <p class="card-text">
+          {% if item.link %}
+            <a href="{{ item.link }}" target="_blank">{{ item.link }}</a>
+          {% else %}
+            <span class="text-muted">링크 없음</span>
+          {% endif %}
+        </p>
+        <!-- 삭제 버튼 -->
+        <form method="POST" action="{{ url_for('admin.carousel_delete', carousel_id=item.id) }}" onsubmit="return confirm('정말 삭제하시겠습니까?')">
+          <button type="submit" class="btn btn-sm btn-danger">삭제</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<p class="text-muted">등록된 이미지가 없습니다.</p>
+{% endif %}
+  </div>
+</div>
+
+</body>
+</html>

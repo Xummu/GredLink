@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>사용자 관리</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.5-dist/css/bootstrap.min.css') }}">
+  <script src="{{ url_for('static', filename='bootstrap-5.3.5-dist/js/bootstrap.bundle.js') }}"></script>
+  <style>
+    body {
+      background-color: #fff;
+      padding-bottom: 100px;
+    }
+    .top-bar {
+      background-color: white;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      border-bottom: 2px solid pink;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+    .user-table td, .user-table th {
+      vertical-align: middle;
+      text-align: center;
+    }
+    .fixed-bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 10px;
+      background: #fff;
+      border-top: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <a href="{{ url_for('admin.dashboard') }}" style="text-decoration: none; color: black;"><h4 class="m-0">&lt;</h4></a>
+    <h4 class="mx-auto mb-0">사용자 관리</h4>
+    <div style="width:24px;"></div>
+  </div>
+
+  <div class="container mt-4">
+    <form method="post" action="{{ url_for('admin.user_update') }}">
+      <table class="table table-bordered user-table">
+        <thead class="table-light">
+          <tr>
+            <th>사용자명</th>
+            <th>역할</th>
+            <th>상태</th>
+            <th>수정</th>
+            <th>삭제</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% if users %}
+          {% for user in users %}
+          <tr>
+            <td>
+              <input type="text" name="username_{{ user.id }}" value="{{ user.username }}" class="form-control">
+            </td>
+            <td>
+              <select name="role_{{ user.id }}" class="form-select">
+                <option value="user" {% if user.role == 'user' %}selected{% endif %}>user</option>
+                <option value="buser" {% if user.role == 'buser' %}selected{% endif %}>buser</option>
+                <option value="admin" {% if user.role == 'admin' %}selected{% endif %}>admin</option>
+              </select>
+            </td>
+            <td>
+              {% if user.is_delete %}
+                <span class="text-danger">삭제됨</span>
+              {% else %}
+                <span class="text-success">정상</span>
+              {% endif %}
+            </td>
+            <td>
+              <button type="submit" name="edit_id" value="{{ user.id }}" class="btn btn-sm btn-primary">수정</button>
+            </td>
+            <td>
+              {% if not user.is_delete %}
+              <form method="post" action="{{ url_for('admin.user_delete', user_id=user.id) }}">
+                <button type="submit" class="btn btn-sm btn-danger">삭제</button>
+              </form>
+              {% else %}
+              <button class="btn btn-sm btn-secondary" disabled>삭제됨</button>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+
+        {% else %}
+             <tr>
+                <td colspan="5" class="text-center text-muted">현재 등록된 사용자가 없습니다.</td>
+            </tr>
+        {% endif %}
+        </tbody>
+      </table>
+    </form>
+
+    <hr>
+    <h4>새 사용자 추가</h4>
+    <form method="post" action="{{ url_for('admin.user_add') }}">
+      <div class="mb-3">
+        <label>사용자 이름</label>
+        <input type="text" name="username" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label>비밀번호</label>
+        <input type="password" name="password" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label>이름</label>
+        <input type="text" name="real_name" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label>전화번호</label>
+        <input type="text" name="phone" class="form-control">
+      </div>
+        <div class="mb-3">
+        <label>email</label>
+        <input type="text" name="email" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label>역할</label>
+        <select name="role" class="form-control" required>
+          <option value="user">일반 사용자</option>
+          <option value="buser">기업 사용자</option>
+          <option value="admin">관리자</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">추가</button>
+    </form>
+  </div>
+</body>
+</html>

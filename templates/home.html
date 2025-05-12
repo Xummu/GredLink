@@ -133,15 +133,28 @@
     <!-- 추가된 슬라이드 -->
     <div id="newsCarousel" class="carousel slide carousel-container" data-bs-ride="carousel">
       <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="{{url_for('static',filename='img/demo1.jpg')}}" class="d-block w-100" alt="슬라이드1" />
-        </div>
-        <div class="carousel-item">
+
+          {% if images %}
+          {% for item in images %}
+              <div class="carousel-item {% if loop.first %}active{% endif %}">
+                  <a href="{{ item.link }}" style="text-decoration: none"><img src="{{ url_for('static', filename=item.image_path) }}" class="d-block w-100" alt="{{ item.caption }}" /></a>
+              </div>
+          {% endfor %}
+
+          {% else %}
+          <div class="carousel-item active">
+          <img src="{{url_for('static',filename='img/demo1.jpg')}}" class="d-block w-100" alt="슬라이드3" />
+            </div>
+          <div class="carousel-item">
           <img src="{{url_for('static',filename='img/demo2.jpg')}}" class="d-block w-100" alt="슬라이드2" />
-        </div>
-        <div class="carousel-item">
+            </div>
+         <div class="carousel-item">
           <img src="{{url_for('static',filename='img/demo3.jpg')}}" class="d-block w-100" alt="슬라이드3" />
-        </div>
+            </div>
+          {% endif %}
+
+
+
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -171,23 +184,44 @@
     </div>
   </div>
 
-  <div class="bottom-nav">
+   <div class="bottom-nav">
     <a href="{{ url_for('main.home') }}" style="text-decoration: none;color: black;font-weight: bold">
-      <img src="{{url_for('static',filename='img/home_active.png')}}" alt="홈" />
+      <img src="{{url_for('static',filename='img/home.png')}}" alt="홈" />
       홈
     </a>
-    <a href="{{ url_for('main.search')}}" style="text-decoration: none;color: black;font-weight: bold">
-      <img src="{{url_for('static',filename='img/search.png')}}" alt="검색" />
-      검색
-    </a>
-    <a href="{{ url_for('main.message')}}" style="text-decoration: none;color: black;font-weight: bold">
-      <img src="{{url_for('static',filename='img/chat.png')}}" alt="채팅" />
-      채팅
-    </a>
-    <a href="{{url_for('main.user_profile')}}" style="text-decoration: none;color: black;font-weight: bold">
-      <img src="{{url_for('static',filename='img/my.png')}}" alt="MY" />
-      MY
-    </a>
-  </div>
+     {% if role == 'admin' %}
+          <a href="#" style="text-decoration: none;color: black;font-weight: bold">
+              <img src="{{url_for('static',filename='img/search.png')}}" alt="금지" />금지
+          </a>
+          <a href="#" style="text-decoration: none;color: black;font-weight: bold">
+          <img src="{{url_for('static',filename='img/chat.png')}}" alt="금지" />금지
+          </a>
+     {% else %}
+         <a href="{{ url_for('main.search')}}" style="text-decoration: none;color: black;font-weight: bold">
+              <img src="{{url_for('static',filename='img/search.png')}}" alt="검색" />검색
+          </a>
+          <a href="{{ url_for('main.message')}}" style="text-decoration: none;color: black;font-weight: bold">
+          <img src="{{url_for('static',filename='img/chat.png')}}" alt="채팅" />채팅
+          </a>
+     {% endif %}
+
+     {% if role == 'admin' %}
+        <a href="{{url_for('admin.dashboard')}}" style="text-decoration: none;color: black;font-weight: bold">
+        <img src="{{url_for('static',filename='img/my_active.png')}}" alt="MY" />
+        MY
+        </a>
+
+     {% elif role == 'buser' %}
+        <a href="{{url_for('main.user_profile')}}" style="text-decoration: none;color: black;font-weight: bold">
+        <img src="{{url_for('static',filename='img/my_active.png')}}" alt="MY" />
+        MY
+        </a>
+     {% else %}
+        <a href="{{url_for('main.user_profile')}}" style="text-decoration: none;color: black;font-weight: bold">
+        <img src="{{url_for('static',filename='img/my_active.png')}}" alt="MY" />
+        MY
+        </a>
+     {% endif %}
+   </div>
 </body>
 </html>

@@ -4,6 +4,7 @@ from config import SQLALCHEMY_DATABASE_URI,SECRET_KEY,SQLALCHEMY_TRACK_MODIFICAT
 from routes.auth import auth_bp
 from models.user import User
 from routes.main import main_bp
+from routes.admin import admin_bp
 
 
 @login_manager.user_loader
@@ -28,6 +29,7 @@ def create_app():
 
     app.register_blueprint(main_bp)
     app.register_blueprint(auth_bp)
+    app.register_blueprint(admin_bp)
 
     @app.errorhandler(404)
     def page_not_found(e):
