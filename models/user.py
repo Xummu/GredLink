@@ -14,6 +14,9 @@ class User(UserMixin, db.Model):
     is_delete = db.Column(db.Boolean, default=False) #삭제표기
     real_name = db.Column(db.String(64), nullable=False) #이름
     phone = db.Column(db.String(20), nullable=False) #전화번호
+    birthday = db.Column(db.String(20), nullable=True)
+    gender = db.Column(db.String(20), nullable=True)
+    address = db.Column(db.String(255), nullable=True)
 
 
     def set_password(self, password):

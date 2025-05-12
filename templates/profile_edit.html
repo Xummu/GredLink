@@ -44,7 +44,7 @@
 <div class="container mt-4">
   <form method="POST" enctype="multipart/form-data" action="{{ url_for('main.profile_edit') }}">
     <div class="text-center">
-      <img src="{{ url_for('static', filename=current_user.avatar or 'img/icon.png') }}" alt="프로필 이미지" class="avatar-preview">
+      <img src="{{ url_for('static', filename= current_user.avatar if current_user.avatar else 'img/icon.png') }}" alt="프로필 이미지" class="avatar-preview">
       <div class="mb-3">
         <input type="file" name="avatar" accept="image/*" class="form-control">
       </div>

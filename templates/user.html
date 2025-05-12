@@ -105,13 +105,15 @@
   </div>
 
   <div class="container-fluid content-wrapper">
-    <div class="profile-card">
-      <img src="{{url_for('static',filename='current_user.avatar or img/icon.png')}}" alt="프로필" />
+     <a href="{{ url_for('main.profile_edit')}}" style="text-decoration: none;color: black"><div class="profile-card">
+
+      <img src="{{url_for('static',filename= current_user.avatar if current_user.avatar else 'img/icon.png')}}" alt="프로필" />
       <div>
-        <div class="fw-bold">닉네임: HelloKitty</div>
-        <div class="text-muted" style="font-size: 0.9rem;">010-8888-8888</div>
+        <div class="fw-bold">이름: {{ current_user.real_name }}</div>
+        <div class="text-muted" style="font-size: 0.9rem;">전화번호:{{ current_user.phone }}</div>
       </div>
-    </div>
+
+    </div> </a>
 
     <div class="menu-card mt-3"><a href="{{ url_for('main.user_seen') }}">👁 최근 본 게시물</a></div>
     <div class="menu-card"><a href="{{ url_for('main.user_favorites') }}">💗 즐겨찾기</a></div>

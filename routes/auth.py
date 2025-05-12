@@ -1,5 +1,9 @@
+from operator import or_
+
 from flask import Blueprint,render_template,request,redirect,url_for,flash
 from flask_login import login_user, logout_user, login_required, current_user
+from werkzeug.security import generate_password_hash
+
 from extensions import db
 from models.user import User
 
@@ -54,3 +58,28 @@ def pass_reset():
         contact = request.form.get('contact')
         flash('임시 비밀번호 기능은 아직 구현되지 않았습니다.','info')
     return render_template('pass_reset.html')
+
+@auth_bp.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        realname = request.form['realname']
+        birthday = request.form['birthday']
+        phone = request.form['phone']
+        gender = request.form['gender']
+        address = request.form['address']
+        email = request.form['email']
+        password = request.form['password']
+
+        existing =User.query.filter(or_(User.username == username,User.email==email,User.phone==phone)).first()
+        if existing:
+            flash('이미 존재하는 아이디/이메일/전화번호입니다.','danger')
+
+        password_hash = generate_password_hash(password, method='pbkdf2:sha256')
+
+        new_user = User(username=username,real_name=realname,birthday=birthday,phone=phone,gender=gender,address=address,email=email,password_hash=password_hash)
+        db.session.add(new_user)
+        db.session.commit()
+        flash('회원 가입이 온료되었습니다. 로그인해 주세요.','success')
+        return redirect(url_for('auth.login'))
+    return render_template('register.html')

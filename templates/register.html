@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원 가입</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.5-dist/css/bootstrap.min.css') }}">
+  <script src="{{ url_for('static', filename='bootstrap-5.3.5-dist/js/bootstrap.bundle.js') }}"></script>
+  <style>
+    body {
+      background-color: #fff;
+      font-family: sans-serif;
+      padding: 20px;
+    }
+    .form-control {
+      border-radius: 20px;
+      border: 2px solid #ffc0cb;
+      margin-bottom: 12px;
+    }
+    .form-check-label {
+      font-size: 0.9rem;
+    }
+    .submit-btn {
+      border-radius: 20px;
+      background-color: #ffc0cb;
+      color: #fff;
+      font-weight: bold;
+      padding: 10px;
+      width: 100%;
+    }
+    .title {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-top: 16px;
+      margin-bottom: 12px;
+      color: #d18aa6;
+    }
+    .form-section {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .register-img {
+      width: 100%;
+      border-radius: 10px;
+      max-height: 300px;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-section">
+    <div class="text-end"><a href="{{ url_for('auth.login') }}" style="text-decoration: none;">로그인 하기</a></div>
+    <div class="title">회원 가입</div>
+    <div class="text-center">
+      <img src="{{ url_for('static', filename='img/register.png') }}" alt="가입 이미지" class="register-img">
+    </div>
+    <form method="POST" action="{{ url_for('auth.register') }}">
+      <input type="text" name="username" placeholder="아이디" class="form-control" required>
+      <input type="text" name="real_name" placeholder="이름" class="form-control" required>
+      <input type="date" name="birth" placeholder="생일" class="form-control">
+      <input type="text" name="phone" placeholder="휴대폰 (예: +82...)" class="form-control">
+      <select name="gender" class="form-control">
+        <option value="">성별 선택</option>
+        <option value="male">남성</option>
+        <option value="female">여성</option>
+        <option value="other">기타</option>
+      </select>
+      <input type="text" name="address" placeholder="상세 주소" class="form-control">
+      <input type="email" name="email" placeholder="이메일" class="form-control" required>
+      <input type="password" name="password" placeholder="비밀번호" class="form-control" required>
+
+      <div class="form-check mb-2">
+        <input class="form-check-input" type="checkbox" required>
+        <label class="form-check-label">필수 약관에 모두 동의합니다.</label>
+      </div>
+
+      <button type="submit" class="btn submit-btn">회원 가입</button>
+    </form>
+  </div>
+</body>
+</html>
