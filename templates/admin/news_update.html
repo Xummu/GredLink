@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>뉴스 수정</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.5-dist/css/bootstrap.min.css') }}">
+  <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+</head>
+<body class="container py-4">
+
+  <h4 class="mb-4">뉴스 수정</h4>
+
+  <form method="POST" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label>제목</label>
+      <input type="text" name="title" class="form-control" value="{{ news.title }}" required>
+    </div>
+
+    <div class="mb-3">
+      <label>내용</label>
+      <textarea name="content" rows="10" class="form-control">{{ news.content }}</textarea>
+      <script>CKEDITOR.replace('content');</script>
+    </div>
+
+    <div class="mb-3">
+      <label>새 이미지 (선택)</label>
+      <input type="file" name="image" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">저장</button>
+  </form>
+
+</body>
+</html>

@@ -56,19 +56,32 @@
     <div class="text-center">
       <img src="{{ url_for('static', filename='img/register.png') }}" alt="가입 이미지" class="register-img">
     </div>
+     <!-- templates/_flash.html -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+
     <form method="POST" action="{{ url_for('auth.register') }}">
-      <input type="text" name="username" placeholder="아이디" class="form-control" required>
-      <input type="text" name="real_name" placeholder="이름" class="form-control" required>
-      <input type="date" name="birth" placeholder="생일" class="form-control">
-      <input type="text" name="phone" placeholder="휴대폰 (예: +82...)" class="form-control">
+      <input type="text" name="username" placeholder="아이디" class="form-control" required value="{{ username or '' }}">
+      <input type="text" name="real_name" placeholder="이름" class="form-control" required value="{{ real_name or '' }}">
+      <input type="date" name="birth" placeholder="생일" class="form-control" value="{{ birth or '' }}">
+      <input type="text" name="phone" placeholder="휴대폰 (예: +82...)" class="form-control" value="{{ phone or '' }}">
       <select name="gender" class="form-control">
         <option value="">성별 선택</option>
         <option value="male">남성</option>
         <option value="female">여성</option>
         <option value="other">기타</option>
       </select>
-      <input type="text" name="address" placeholder="상세 주소" class="form-control">
-      <input type="email" name="email" placeholder="이메일" class="form-control" required>
+      <input type="text" name="address" placeholder="상세 주소" class="form-control" value="{{ address or '' }}">
+      <input type="email" name="email" placeholder="이메일" class="form-control" required value="{{ email or '' }}">
       <input type="password" name="password" placeholder="비밀번호" class="form-control" required>
 
       <div class="form-check mb-2">

@@ -3,10 +3,12 @@ import os
 from flask import Blueprint, render_template, redirect, url_for, request, flash, abort, current_app
 from flask_login import login_required, current_user
 from werkzeug.security import generate_password_hash
+from werkzeug.utils import secure_filename
 
 from models.carousel import Carousel
 from models.user import User
 from extensions import db
+from models.news import News
 
 admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
 
@@ -20,6 +22,60 @@ def admin_required(func):
         return func(*args, **kwargs)
     return decorated_view
 
+@admin_bp.route('/news_edit', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def news_edit():
+    if request.method == 'POST':
+        title = request.form.get('title')
+        content = request.form.get('content')
+
+        if not title or not content:
+            flash('제목과 내용을 모두 입력하세요','warning')
+            return redirect(url_for('admin.news_edit'))
+        news = News(title=title, content=content,author_id = current_user.id)
+        db.session.add(news)
+        db.session.commit()
+        flash('뉴스가 등록되었습니다.', 'success')
+        return redirect(url_for('admin.news_edit'))
+
+    news_list = News.query.order_by(News.timestamp.desc()).all()
+    return render_template('admin/news_edit.html', news_list=news_list)
+@admin_bp.route('/news_delete/<int:new_id>', methods=['POST'])
+@login_required
+@admin_required
+def news_delete(news_id):
+    news = News.query.get_or_404(news_id)
+    db.session.delete(news)
+    db.session.commit()
+    flash('뉴스가 삭제되었습니다','info')
+    return redirect(url_for('admin.news_edit'))
+@admin_bp.route('/news_edit/<int:news_id>', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def news_update(news_id):
+    news = News.query.get_or_404(news_id)
+
+    if request.method == 'POST':
+        news.title = request.form['title']
+        news.content = request.form['content']
+
+        image = request.files.get('image')
+        if image and image.filename:
+            filename = secure_filename(image.filename)
+
+            upload_dir = os.path.join(current_app.static_folder, 'uploads/news')
+            os.makedirs(upload_dir, exist_ok=True)
+
+            path = os.path.join('uploads/news', filename)
+            image.save(os.path.join(current_app.static_folder,path))
+            news.image_path = path.replace('\\', '/')
+
+        db.session.add(news)
+        flash('뉴수가 수정되었습니다.', 'success')
+        return redirect(url_for('admin.news_edit'))
+
+    return render_template('admin/news_edit.html', news=news)
 
 @admin_bp.route('/dashboard')
 @login_required

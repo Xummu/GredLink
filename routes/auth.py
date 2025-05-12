@@ -1,4 +1,4 @@
-from operator import or_
+from sqlalchemy import or_
 
 from flask import Blueprint,render_template,request,redirect,url_for,flash
 from flask_login import login_user, logout_user, login_required, current_user
@@ -24,7 +24,7 @@ def login():
             if user.role == 'admin':
                 return redirect(url_for('admin.dashboard'))
             elif user.role == 'buser':
-                return redirect(url_for('buser.dashboard'))
+                return redirect(url_for('main.home'))
             else:
                 return redirect(url_for('main.home',role=current_user.role))
 
@@ -62,24 +62,25 @@ def pass_reset():
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        username = request.form['username']
-        realname = request.form['realname']
-        birthday = request.form['birthday']
-        phone = request.form['phone']
-        gender = request.form['gender']
-        address = request.form['address']
-        email = request.form['email']
-        password = request.form['password']
+        username = request.form.get('username')
+        realname = request.form.get('real_name')
+        birthday = request.form.get('birth')
+        phone = request.form.get('phone')
+        gender = request.form.get('gender')
+        address = request.form.get('address')
+        email = request.form.get('email')
+        password = request.form.get('password')
 
-        existing =User.query.filter(or_(User.username == username,User.email==email,User.phone==phone)).first()
+        existing =User.query.filter(or_(User.username==username,User.phone==phone,User.email==email)).first()
         if existing:
             flash('이미 존재하는 아이디/이메일/전화번호입니다.','danger')
+            return render_template('register.html',just_submitted=True,username=username,real_name=realname,phone=phone,gender=gender,address=address,email=email)
 
         password_hash = generate_password_hash(password, method='pbkdf2:sha256')
 
         new_user = User(username=username,real_name=realname,birthday=birthday,phone=phone,gender=gender,address=address,email=email,password_hash=password_hash)
         db.session.add(new_user)
         db.session.commit()
-        flash('회원 가입이 온료되었습니다. 로그인해 주세요.','success')
+        flash('회원 가입이 완료 되었습니다. 로그인해 주세요.','success')
         return redirect(url_for('auth.login'))
     return render_template('register.html')
