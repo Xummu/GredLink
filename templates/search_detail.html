@@ -97,37 +97,24 @@
       <h1>&lt;</h1>
     </a>
     <div class="top-title">
-      <span>Mom's punch</span>
+      <span>공고내용</span>
     </div>
     <div style="width: 24px;"></div> <!-- placeholder for spacing -->
   </div>
 
   <div class="container">
-    <div class="section-title">모집조건</div>
+    <div class="section-title">상세내용</div>
     <div class="info-box">
       <table>
-        <tr><td>근무기간</td><td>6년 이상</td></tr>
-        <tr><td>근무요일</td><td>요일협의</td></tr>
-        <tr><td>근무시간</td><td>시간협의</td></tr>
-        <tr><td>고용형태</td><td>인턴</td></tr>
-        <tr><td>복리후생</td><td>중식제공, 교육비지원, 전환가능성 있음, 주차지원, 자유복장, 알고리즘 스터디 제공</td></tr>
+        <tr><td>직업명</td><td>{{ job.title }}</td></tr>
+        <tr><td>근무내용</td><td>{{ job.content }}</td></tr>
+        <tr><td>근무위치</td><td>{{ job.location }}</td></tr>
+        <tr><td>근무급여</td><td>{{ job.salary }}</td></tr>
       </table>
     </div>
 
-    <div class="section-title">기업정보</div>
-    <div class="info-box">
-      <table>
-        <tr><td>회사명</td><td>Mom's punch</td></tr>
-        <tr><td>업종</td><td>IT / 알고리즘 플랫폼 개발</td></tr>
-        <tr><td>설립연도</td><td>2017년</td></tr>
-        <tr><td>사원수</td><td>22명</td></tr>
-        <tr><td>주소</td><td>서울특별시 마이구 백범로 102</td></tr>
-        <tr><td>대표자명</td><td>이수연</td></tr>
-      </table>
-    </div>
-  </div>
 
-  <a href="{{ url_for('auth.chat') }}" style="text-decoration: none;color: black">
+  <a href="{{ url_for('auth.chat',job_id=job.id) }}" style="text-decoration: none;color: black">
       <div class="apply-btn">
         지원하기
       </div>

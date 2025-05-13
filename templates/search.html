@@ -131,21 +131,15 @@
 
   <div class="container content-wrapper">
     <!-- 공고 카드 -->
-    <div class="news-card">
-      <img src="{{url_for('static',filename='img/news_thumb.jpg')}}" alt="썸네일" />
+      {% for job in jobs %}
+          <div class="news-card">
+      <img src="{{url_for('static',filename=job.image_path or 'img/news_thumb.jpg')}}" alt="썸네일" />
       <div class="news-text">
-        <p><strong>Mon's punch</strong><br />Mon's punch 햄버거 맛있습니다...</p>
-        <a href="{{ url_for('main.search_detail') }}">자세히 보기</a>
+        <p><strong>{{ job.title }}</strong><br />{{ job.location }} · {{ job.salary }}</p>
+        <a href="{{ url_for('main.search_detail', job_id=job.id) }}">자세히 보기</a>
       </div>
     </div>
-
-    <div class="news-card">
-      <img src="{{url_for('static',filename='img/news_thumb.jpg')}}" alt="썸네일" />
-      <div class="news-text">
-        <p><strong>adibas</strong><br />친환경 플라스틱으로 만든 제품을 체험해보세요...</p>
-        <a href="{{ url_for('main.search_detail') }}">자세히 보기</a>
-      </div>
-    </div>
+    {% endfor %}
   </div>
 
  <div class="bottom-nav">

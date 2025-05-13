@@ -6,10 +6,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.5-dist/css/bootstrap.min.css') }}">
   <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+    <style>
+    body {
+      background-color: #fff;
+      padding-bottom: 100px;
+    }
+    .top-bar {
+      background-color: white;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      border-bottom: 2px solid pink;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+    .top-bar h4 {
+      flex-grow: 1;
+      text-align: center;
+      margin: 0;
+    }
+    </style>
 </head>
 <body class="container py-4">
 
-  <h4 class="mb-4">뉴스 수정</h4>
+  <div class="top-bar">
+  <a href="{{ url_for('admin.dashboard') }}" class="text-decoration-none text-dark"><h4>&lt;</h4></a>
+  <h4>뉴스 수정</h4>
+  <div style="width:24px;"></div>
+</div>
 
   <form method="POST" enctype="multipart/form-data">
     <div class="mb-3">

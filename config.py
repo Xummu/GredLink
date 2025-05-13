@@ -5,7 +5,7 @@ import os
 #local host mysql 연결
 
 DB_USER = 'root'
-DB_PASSWORD = '12345678'
+DB_PASSWORD = ''
 DB_NAME = 'GredLink'
 DB_HOST = 'localhost'
 

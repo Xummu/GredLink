@@ -7,6 +7,8 @@ from flask_login import login_required, current_user
 from werkzeug.utils import secure_filename
 
 from models.carousel import Carousel
+from models.news import News
+from models.job import Job
 
 main_bp = Blueprint('main', __name__)
 
@@ -17,11 +19,17 @@ def index():
 @main_bp.route('/home')
 def home():
     carousels = Carousel.query.all()
-    return render_template('home.html',role=current_user.role,images=carousels)
+    news_list = News.query.order_by(News.created_at.desc()).all()
+    if current_user.is_authenticated:
+        return render_template('home.html', role=current_user.role, images=carousels, news_list=news_list)
+    else:
+        return render_template('home.html', images=carousels,news_list=news_list)
 
-@main_bp.route('/home/new_detail')
-def new_detail():
-    return render_template('new_detail.html')
+
+@main_bp.route('/home/new_detail/<int:news_id>')
+def new_detail(news_id):
+    news =News.query.get_or_404(news_id)
+    return render_template('new_detail.html',news=news)
 
 @main_bp.route('/user')
 @login_required
@@ -53,11 +61,13 @@ def message():
 
 @main_bp.route('/search')
 def search():
-    return render_template('search.html')
+    jobs = Job.query.order_by(Job.created_at.desc()).all()
+    return render_template('search.html',jobs=jobs)
 
-@main_bp.route('/search/search_detail')
-def search_detail():
-    return render_template('search_detail.html')
+@main_bp.route('/search/search_detail/<int:job_id>')
+def search_detail(job_id):
+    job = Job.query.get_or_404(job_id)
+    return render_template('search_detail.html',job=job)
 
 @main_bp.route('/profile_edit',methods=['GET','POST'])
 @login_required

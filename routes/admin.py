@@ -29,19 +29,31 @@ def news_edit():
     if request.method == 'POST':
         title = request.form.get('title')
         content = request.form.get('content')
-
+        image = request.files.get('image')
         if not title or not content:
             flash('제목과 내용을 모두 입력하세요','warning')
             return redirect(url_for('admin.news_edit'))
-        news = News(title=title, content=content,author_id = current_user.id)
+
+
+        if image and image.filename:
+            filename = secure_filename(image.filename)
+
+            upload_dir = os.path.join(current_app.static_folder, 'uploads/news')
+            os.makedirs(upload_dir, exist_ok=True)
+
+            path = os.path.join('uploads/news', filename)
+            image.save(os.path.join(current_app.static_folder, path))
+            image_path = path.replace('\\', '/')
+
+        news = News(title=title, content=content, author_id=current_user.id,image_path=image_path)
         db.session.add(news)
         db.session.commit()
         flash('뉴스가 등록되었습니다.', 'success')
         return redirect(url_for('admin.news_edit'))
 
-    news_list = News.query.order_by(News.timestamp.desc()).all()
+    news_list = News.query.order_by(News.created_at.desc()).all()
     return render_template('admin/news_edit.html', news_list=news_list)
-@admin_bp.route('/news_delete/<int:new_id>', methods=['POST'])
+@admin_bp.route('/news_delete/<int:news_id>', methods=['POST'])
 @login_required
 @admin_required
 def news_delete(news_id):
@@ -50,6 +62,7 @@ def news_delete(news_id):
     db.session.commit()
     flash('뉴스가 삭제되었습니다','info')
     return redirect(url_for('admin.news_edit'))
+
 @admin_bp.route('/news_edit/<int:news_id>', methods=['GET', 'POST'])
 @login_required
 @admin_required
@@ -72,10 +85,12 @@ def news_update(news_id):
             news.image_path = path.replace('\\', '/')
 
         db.session.add(news)
+        db.session.commit()
         flash('뉴수가 수정되었습니다.', 'success')
-        return redirect(url_for('admin.news_edit'))
 
-    return render_template('admin/news_edit.html', news=news)
+        return redirect(url_for('admin.news_update',news_id=news_id))
+
+    return render_template('admin/news_update.html', news=news)
 
 @admin_bp.route('/dashboard')
 @login_required

@@ -117,14 +117,14 @@
 </head>
 <body>
   <div class="top-bar">
-    <a href="{{ url_for('main.massage') }}" style="text-decoration: none; color: black; font-size: 1.5rem;">&lt;</a>
-    <div class="top-title">홍길동</div>
+    <a href="{{ url_for('main.message') }}" style="text-decoration: none; color: black; font-size: 1.5rem;">&lt;</a>
+    <div class="top-title">{{job.buser.real_name}}</div>
     <div style="width: 24px;"></div>
   </div>
 
   <div class="position-card">
-    <h5>adibas</h5>
-    <p style="margin: 0; color: #555; font-size: 0.95rem;">글로벌 마케팅 매니저<br><span style="font-size: 0.85rem; color: #888;">D-13 | 경력 | 대졸</span><br><span style="color: #9c3c3c;">💰 시급 10,000-13,000 만원</span></p>
+    <h5>{{job.title}}</h5>
+    <p style="margin: 0; color: #555; font-size: 0.95rem;">{{job.content}}<br><span style="font-size: 0.85rem; color: #888;">{{ job.location }}</span><br><span style="color: #9c3c3c;">💰 {{job.salary}}</span></p>
   </div>
 
   <div class="chat-box">

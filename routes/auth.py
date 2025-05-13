@@ -6,6 +6,7 @@ from werkzeug.security import generate_password_hash
 
 from extensions import db
 from models.user import User
+from models.job import Job
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -24,13 +25,15 @@ def login():
             if user.role == 'admin':
                 return redirect(url_for('admin.dashboard'))
             elif user.role == 'buser':
-                return redirect(url_for('main.home'))
+                return redirect(url_for('buser.dashboard'))
             else:
                 return redirect(url_for('main.home',role=current_user.role))
 
         flash('아이디 또는 비밀번호가 틀렸습니다.','danger')
 
-    return render_template('login.html')
+    show_flash = request.args.get('show_flash') == '1'
+
+    return render_template('login.html',show_flash=show_flash)
 
 @auth_bp.route('/logout')
 @login_required
@@ -38,10 +41,11 @@ def logout():
     logout_user()
     return redirect(url_for('auth.login'))
 
-@auth_bp.route('/chat')
+@auth_bp.route('/chat/<int:job_id>')
 @login_required
-def chat():
-    return render_template('chat.html')
+def chat(job_id):
+    job = Job.query.get_or_404(job_id)
+    return render_template('chat.html',job=job)
 
 @auth_bp.route('/id_search', methods=['GET', 'POST'])
 def id_search():

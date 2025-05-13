@@ -120,16 +120,16 @@
     }
   </style>
 </head>
-<body>
+<html>
   <div class="top-bar">
     <img src="{{url_for('static',filename='img/news_logo.png')}}" alt="로고" height="30" />
     <div class="search-box">
       <img src="{{url_for('static',filename='img/news_search_icon.png')}}" alt="검색" width="16" />
-      <input type="text" placeholder="검색어 입력" />
+      <input type="text" placeholder="검색어 입력" id="newsSearchInput" />
     </div>
   </div>
 
-  <div class="container content-wrapper">
+  <body class="container content-wrapper">
     <!-- 추가된 슬라이드 -->
     <div id="newsCarousel" class="carousel slide carousel-container" data-bs-ride="carousel">
       <div class="carousel-inner">
@@ -166,27 +166,27 @@
       </button>
     </div>
 
-    <!-- 뉴스 카드 -->
-    <div class="news-card">
-      <img src="{{url_for('static',filename='img/news_thumb.jpg')}}" alt="썸네일" />
-      <div class="news-text">
-        <p><strong>AI 분야 인재 수요 폭발</strong><br />신입 개발자에게 억대 연봉 제시 등 다양한 이슈...</p>
-        <a href="{{ url_for('main.new_detail') }}">자세히 보기</a>
-      </div>
-    </div>
 
-    <div class="news-card">
-      <img src="{{url_for('static',filename='img/news_thumb.jpg')}}" alt="썸네일" />
-      <div class="news-text">
-        <p><strong>'재택근무' 확산</strong><br />플랫폼형 파트타임 직종이 Z세대의 취업...</p>
-        <a href="{{ url_for('main.new_detail') }}">자세히 보기</a>
-      </div>
-    </div>
-  </div>
+    <!-- 뉴스 카드 -->
+    {% if news_list %}
+        {% for item in news_list %}
+        <div class="news-card" data-search="{{ item.title }}">
+            <img src="{{ url_for('static',filename=item.image_path or 'img/news_thumb.jpg') }}" alt="썸네일">
+            <div class="news-text">
+                <p><strong>{{ item.title }}</strong><br/>{{ item.content[:20]|safe }}</p>
+                <a href="{{ url_for('main.new_detail',news_id=item.id) }}">자세히 보기</a>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="text-center text-muted mt-5">
+            <p>등록된 뉴스가 없습니다.</p>
+        </div>
+    {% endif %}
 
    <div class="bottom-nav">
     <a href="{{ url_for('main.home') }}" style="text-decoration: none;color: black;font-weight: bold">
-      <img src="{{url_for('static',filename='img/home.png')}}" alt="홈" />
+      <img src="{{url_for('static',filename='img/home_active.png')}}" alt="홈" />
       홈
     </a>
      {% if role == 'admin' %}
@@ -207,21 +207,50 @@
 
      {% if role == 'admin' %}
         <a href="{{url_for('admin.dashboard')}}" style="text-decoration: none;color: black;font-weight: bold">
-        <img src="{{url_for('static',filename='img/my_active.png')}}" alt="MY" />
+        <img src="{{url_for('static',filename='img/my.png')}}" alt="MY" />
         MY
         </a>
 
      {% elif role == 'buser' %}
-        <a href="{{url_for('main.user_profile')}}" style="text-decoration: none;color: black;font-weight: bold">
-        <img src="{{url_for('static',filename='img/my_active.png')}}" alt="MY" />
+        <a href="{{url_for('buser.dashboard')}}" style="text-decoration: none;color: black;font-weight: bold">
+        <img src="{{url_for('static',filename='img/my.png')}}" alt="MY" />
         MY
         </a>
      {% else %}
         <a href="{{url_for('main.user_profile')}}" style="text-decoration: none;color: black;font-weight: bold">
-        <img src="{{url_for('static',filename='img/my_active.png')}}" alt="MY" />
+        <img src="{{url_for('static',filename='img/my.png')}}" alt="MY" />
         MY
         </a>
      {% endif %}
    </div>
+  <div id="noResults" class="text-center text-muted mt-4" style="display: none;">
+  관련 뉴스가 없습니다.
+  </div>
+ <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const input = document.getElementById('newsSearchInput');
+    const cards = document.querySelectorAll('.news-card');
+
+    input.addEventListener('input', function () {
+      const keyword = this.value.toLowerCase();
+      let anyVisible = false;
+
+      cards.forEach(function (card) {
+        const text = card.dataset.search.toLowerCase();
+        const match = text.includes(keyword);
+        card.style.display = match ? 'flex' : 'none';
+        if (match) anyVisible = true;
+      });
+
+      const noResults = document.getElementById('noResults');
+      if (noResults) {
+        noResults.style.display = anyVisible ? 'none' : 'block';
+      }
+    });
+  });
+</script>
+
+
+
 </body>
 </html>

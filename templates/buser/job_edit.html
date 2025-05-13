@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>채용공고 수정</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.5-dist/css/bootstrap.min.css') }}">
+  <script src="{{ url_for('static', filename='bootstrap-5.3.5-dist/js/bootstrap.bundle.js') }}"></script>
+  <style>
+    body { background-color: #f5f5f5; }
+    .container { max-width: 800px; margin-top: 40px; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="mb-3">
+    <a href="{{ url_for('buser.dashboard') }}" class="btn btn-outline-secondary btn-sm">&larr; 돌아가기</a>
+  </div>
+
+  <h3 class="mb-3">채용공고 수정</h3>
+  <form method="POST" action="{{ url_for('buser.job_edit',job_id=job.id)}}" enctype="multipart/form-data" class="border rounded p-4 bg-white shadow-sm">
+    <div class="mb-3">
+      <label class="form-label">직무 제목</label>
+      <input type="text" name="title" class="form-control" value="{{ job.title }}" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">업무 설명</label>
+      <textarea name="content" class="form-control" rows="4" required>{{ job.content }}</textarea>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">근무 위치</label>
+      <input type="text" name="location" class="form-control" value="{{ job.location }}">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">급여</label>
+      <input type="text" name="salary" class="form-control" value="{{ job.salary }}">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">현재 썸네일</label><br>
+      <img src="{{ url_for('static', filename=job.image_path or 'img/default_job.png') }}" width="120" class="rounded mb-2">
+      <input type="file" name="image" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary w-100">수정 완료</button>
+  </form>
+</div>
+</body>
+</html>
