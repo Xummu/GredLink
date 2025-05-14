@@ -66,10 +66,13 @@ def user_scan():
 @main_bp.route('/search')
 def search():
     jobs = Job.query.order_by(Job.created_at.desc()).all()
+    is_login = False
     if current_user.is_authenticated:
-        return render_template('search.html',role=current_user.role,jobs=jobs)
+        is_login = True
+        return render_template('search.html',role=current_user.role,jobs=jobs,is_login=is_login)
     else:
-        return render_template('search.html',jobs=jobs)
+        is_login = False
+        return render_template('search.html',jobs=jobs,is_login=is_login)
 
 @main_bp.route('/search/search_detail/<int:job_id>')
 def search_detail(job_id):

@@ -161,7 +161,12 @@
       <img src="{{url_for('static',filename=job.image_path or 'img/news_thumb.jpg')}}"  alt="썸네일" />
       <div class="news-text">
         <p><strong>{{ job.title }}</strong><br />{{ job.location }} · {{ job.salary }}</p>
-        <a href="{{ url_for('main.search_detail', job_id=job.id) }}">자세히 보기</a>
+        {%  if is_login %}
+          <a href="{{ url_for('main.search_detail', job_id=job.id) }}">자세히 보기</a>
+        {% else %}
+            <a href="{{ url_for('auth.login', job_id=job.id) }}">자세히 보기</a>
+        {% endif %}
+
       </div>
     </div>
     {% endfor %}
