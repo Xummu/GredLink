@@ -155,7 +155,8 @@
 
   <div class="container content-wrapper">
     <!-- 공고 카드 -->
-      {% for job in jobs %}
+    {% if jobs %}
+         {% for job in jobs %}
           <div class="news-card">
       <img src="{{url_for('static',filename=job.image_path or 'img/news_thumb.jpg')}}"  alt="썸네일" />
       <div class="news-text">
@@ -164,6 +165,11 @@
       </div>
     </div>
     {% endfor %}
+
+    {% else %}
+        공고없습니다.
+    {% endif %}
+
   <div id="noResults" class="text-center text-muted my-3" style="display: none;">
   일치하는 결과가 없습니다.
 </div>
@@ -178,7 +184,7 @@
       <img src="{{url_for('static',filename='img/search_active.png')}}" alt="검색" />
       검색
     </a>
-    <a href="{{ url_for('main.message')}}" style="text-decoration: none;color: black;font-weight: bold">
+    <a href="{{ url_for('chat.chat_list')}}" style="text-decoration: none;color: black;font-weight: bold">
       <img src="{{url_for('static',filename='img/chat.png')}}" alt="채팅" />
       채팅
     </a>

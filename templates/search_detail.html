@@ -98,12 +98,21 @@
     </a>
     <div class="top-title">
       <span>공고내용</span>
+        <form action="{{ url_for('main.toggle_favorite', job_id=job.id) }}" method="POST">
+  {% set is_favorite = job in current_user.favorite_jobs|map(attribute='job') %}
+  <button type="submit" class="btn btn-sm {{ 'btn-danger' if is_favorite else 'btn-outline-danger' }}">
+    {{ '❤' if is_favorite else '♡' }}
+  </button>
+</form>
     </div>
+
+
     <div style="width: 24px;"></div> <!-- placeholder for spacing -->
   </div>
 
   <div class="container">
     <div class="section-title">상세내용</div>
+
     <div class="info-box">
       <table>
         <tr><td>직업명</td><td>{{ job.title }}</td></tr>
@@ -114,7 +123,7 @@
     </div>
 
 
-  <a href="{{ url_for('auth.chat',job_id=job.id) }}" style="text-decoration: none;color: black">
+  <a href="{{ url_for('chat.start_job',job_id=job.id)}}" style="text-decoration: none;color: black">
       <div class="apply-btn">
         지원하기
       </div>

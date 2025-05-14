@@ -1,7 +1,7 @@
 from extensions import db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from models.favorite_job import FavoriteJob
 
 class User(UserMixin, db.Model):
     __tablename__ = 'user'
@@ -17,6 +17,8 @@ class User(UserMixin, db.Model):
     birthday = db.Column(db.String(20), nullable=True)
     gender = db.Column(db.String(20), nullable=True)
     address = db.Column(db.String(255), nullable=True)
+
+    favorite_jobs = db.relationship('FavoriteJob',back_populates='user', lazy='dynamic')
 
 
     def set_password(self, password):

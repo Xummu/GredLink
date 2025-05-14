@@ -6,7 +6,7 @@ from models.user import User
 from routes.main import main_bp
 from routes.admin import admin_bp
 from routes.buser import buser_bp
-
+from routes.sns import chat_bp
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -31,6 +31,7 @@ def create_app():
     app.register_blueprint(auth_bp)
     app.register_blueprint(admin_bp)
     app.register_blueprint(buser_bp)
+    app.register_blueprint(chat_bp)
 
     @app.errorhandler(404)
     def page_not_found(e):

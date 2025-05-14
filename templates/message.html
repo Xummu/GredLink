@@ -118,35 +118,96 @@
       height: 24px;
       margin-bottom: 4px;
     }
+
+    .chat-card {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 12px;
+      margin: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: black;
+    }
+
+    .chat-card:hover {
+      background-color: #fef0f4;
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
   </style>
+    <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const input = document.querySelector('.search-box input');
+    const chatCards = document.querySelectorAll('.chat-item .news-card');
+
+    input.addEventListener('input', function () {
+      const keyword = this.value.toLowerCase();
+      let anyVisible = false;
+
+      chatCards.forEach(function (card) {
+        const searchText = card.dataset.search ? card.dataset.search.toLowerCase() : '';
+        const match = searchText.includes(keyword);
+        card.parentElement.style.display = match ? 'block' : 'none'; // a 태그 전체를 숨김/표시
+        if (match) anyVisible = true;
+      });
+
+      // 검색 결과 없을 때 메시지 표시
+      const noResultDiv = document.getElementById('noChatResults');
+      if (noResultDiv) {
+        noResultDiv.style.display = anyVisible ? 'none' : 'block';
+      }
+    });
+  });
+</script>
 </head>
 <body>
   <div class="top-bar">
-    <img src="../static/img/message_logo.png" alt="로고" height="30" />
+    <img src="{{url_for('static',filename='img/message_logo.png')}}" alt="로고" height="30" />
     <div class="search-box">
-      <img src="../static/img/news_search_icon.png" alt="검색" width="16" />
+      <img src="{{url_for('static',filename='img/news_search_icon.png')}}" alt="검색" width="16" />
       <input type="text" placeholder="검색어 입력" />
     </div>
   </div>
 
   <div class="container content-wrapper">
-    <!-- 뉴스 카드 -->
-    <div class="news-card">
-      <img src="../static/img/news_thumb.jpg" alt="썸네일" />
-      <div class="news-text">
-        <p><strong>홍길동</strong><br />알고리즘 A+입니다.</p>
-        <a href="chat.html">자세히 보기</a>
-      </div>
-    </div>
 
-    <div class="news-card">
-      <img src="../static/img/news_thumb.jpg" alt="썸네일" />
+
+
+    <!-- 채팅 카드 -->
+    {% if chat_list %}
+       {% for entry in chat_list %}
+  {% set chat = entry.chat %}
+  {% set partner = entry.partner %}
+
+  <a href="{{ url_for('chat.chat_room', chat_id=chat.id) }}" class="chat-item">
+    <div class="news-card" data-search="{{ partner.real_name }}">
+      <img src="{{ url_for('static', filename=partner.avatar if partner.avatar else 'img/icon.png') }}" alt="프로필">
       <div class="news-text">
-        <p><strong>홍만복</strong><br />야래야래..................</p>
-        <a href="chat.html">자세히 보기</a>
+        <p><strong>{{ partner.real_name }}</strong><br/>{{ chat.job.title }}</p>
       </div>
     </div>
+  </a>
+{% endfor %}
+    {% else %}
+
+             <div class="text-center text-muted mt-5">채팅 목록이 없습니다.</div>
+
+    {% endif %}
+  <div id="noChatResults" class="text-center text-muted mt-4" style="display: none;">
+  관련 채팅 목록이 없습니다.
   </div>
+
+
+
+
 
   <div class="bottom-nav">
     <a href="{{ url_for('main.home') }}" style="text-decoration: none;color: black;font-weight: bold">
@@ -157,7 +218,7 @@
       <img src="{{url_for('static',filename='img/search.png')}}" alt="검색" />
       검색
     </a>
-    <a href="{{ url_for('main.message')}}" style="text-decoration: none;color: black;font-weight: bold">
+    <a href="{{ url_for('chat.chat_list')}}" style="text-decoration: none;color: black;font-weight: bold">
       <img src="{{url_for('static',filename='img/chat_active.png')}}" alt="채팅" />
       채팅
     </a>

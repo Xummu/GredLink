@@ -1,4 +1,5 @@
 import os
+from datetime import timezone,datetime
 from urllib import request
 from extensions import db
 
@@ -7,8 +8,11 @@ from flask_login import login_required, current_user
 from werkzeug.utils import secure_filename
 
 from models.carousel import Carousel
+from models.favorite_job import FavoriteJob
 from models.news import News
 from models.job import Job
+from models.viewed_job import ViewedJob
+from models.chat import ChatRelation,Message
 
 main_bp = Blueprint('main', __name__)
 
@@ -36,15 +40,12 @@ def new_detail(news_id):
 def user_profile():
     return render_template('user.html',role=current_user.role)
 
-@main_bp.route('/user/seen')
-@login_required
-def user_seen():
-    return render_template('see_post.html')
-
 @main_bp.route('/user/favorites')
 @login_required
 def user_favorites():
-    return render_template('like.html')
+    favorites = FavoriteJob.query.filter_by(user_id=current_user.id).all()
+    jobs = [fav.job for fav in favorites if fav.job is not None]
+    return render_template('like.html',jobs=jobs)
 
 @main_bp.route('/user/resume')
 @login_required
@@ -54,13 +55,13 @@ def user_resume():
 def user_scan():
     return render_template('sscan.html')
 
-@main_bp.route('/message')
-@login_required
-def message():
-    if current_user.is_authenticated:
-        return render_template('message.html', role=current_user.role)
-    else:
-        return render_template('message.html')
+# @main_bp.route('/message')
+# @login_required
+# def message():
+#     if current_user.is_authenticated:
+#         return render_template('message.html', role=current_user.role)
+#     else:
+#         return render_template('message.html')
 
 @main_bp.route('/search')
 def search():
@@ -72,7 +73,17 @@ def search():
 
 @main_bp.route('/search/search_detail/<int:job_id>')
 def search_detail(job_id):
+
     job = Job.query.get_or_404(job_id)
+
+    existing =ViewedJob.query.filter_by(user_id=current_user.id,job_id=job_id).first()
+    if existing:
+        existing.viewed_at = datetime.now(timezone.utc)
+    else:
+        db.session.add(ViewedJob(user_id=current_user.id,job_id=job_id))
+    db.session.commit()
+
+
     return render_template('search_detail.html',job=job)
 
 @main_bp.route('/profile_edit',methods=['GET','POST'])
@@ -99,3 +110,31 @@ def profile_edit():
         flash('정보가 수정되었습니다.', 'success')
         return redirect(url_for('main.profile_edit'))
     return render_template('profile_edit.html')
+
+@main_bp.route('/recent_jobs')
+@login_required
+def recent_jobs():
+    recent =(
+        db.session.query(Job)
+        .join(ViewedJob,Job.id==ViewedJob.job_id)
+    .filter(ViewedJob.user_id == current_user.id)
+    .order_by(ViewedJob.viewed_at.desc())
+    .limit(10)
+    .all()
+    )
+    return render_template('see_post.html',jobs=recent)
+
+@main_bp.route('/recent_jobs/<int:job_id>/toggle',methods=['POST'])
+@login_required
+def toggle_favorite(job_id):
+    favorite = FavoriteJob.query.filter_by(user_id=current_user.id,job_id=job_id).first()
+    if favorite:
+        db.session.delete(favorite)
+        db.session.commit()
+        flash('즐겨찾기에서 제거되었습니다.','info')
+    else:
+        new_fav = FavoriteJob(user_id=current_user.id,job_id=job_id)
+        db.session.add(new_fav)
+        db.session.commit()
+        flash('즐겨찾기에 추가되었습니다.','success')
+    return redirect(request.referrer or url_for('main.search'))

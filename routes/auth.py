@@ -41,11 +41,11 @@ def logout():
     logout_user()
     return redirect(url_for('auth.login'))
 
-@auth_bp.route('/chat/<int:job_id>')
-@login_required
-def chat(job_id):
-    job = Job.query.get_or_404(job_id)
-    return render_template('chat.html',job=job)
+# @auth_bp.route('/chat/<int:job_id>')
+# @login_required
+# def chat(job_id):
+#     job = Job.query.get_or_404(job_id)
+#     return render_template('chat.html',job=job)
 
 @auth_bp.route('/id_search', methods=['GET', 'POST'])
 def id_search():
