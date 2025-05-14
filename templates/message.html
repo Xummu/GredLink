@@ -161,10 +161,23 @@
       <img src="{{url_for('static',filename='img/chat_active.png')}}" alt="채팅" />
       채팅
     </a>
-    <a href="{{url_for('main.user_profile')}}" style="text-decoration: none;color: black;font-weight: bold">
-      <img src="{{url_for('static',filename='img/my.png')}}" alt="MY" />
-      MY
-    </a>
+   {% if role == 'admin' %}
+        <a href="{{url_for('admin.dashboard')}}" style="text-decoration: none;color: black;font-weight: bold">
+        <img src="{{url_for('static',filename='img/my.png')}}" alt="MY" />
+        MY
+        </a>
+
+     {% elif role == 'buser' %}
+        <a href="{{url_for('buser.dashboard')}}" style="text-decoration: none;color: black;font-weight: bold">
+        <img src="{{url_for('static',filename='img/my.png')}}" alt="MY" />
+        MY
+        </a>
+     {% else %}
+        <a href="{{url_for('main.user_profile')}}" style="text-decoration: none;color: black;font-weight: bold">
+        <img src="{{url_for('static',filename='img/my.png')}}" alt="MY" />
+        MY
+        </a>
+     {% endif %}
   </div>
 </body>
 </html>

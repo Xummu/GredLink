@@ -57,12 +57,18 @@ def user_scan():
 @main_bp.route('/message')
 @login_required
 def message():
-    return render_template('message.html')
+    if current_user.is_authenticated:
+        return render_template('message.html', role=current_user.role)
+    else:
+        return render_template('message.html')
 
 @main_bp.route('/search')
 def search():
     jobs = Job.query.order_by(Job.created_at.desc()).all()
-    return render_template('search.html',jobs=jobs)
+    if current_user.is_authenticated:
+        return render_template('search.html',role=current_user.role,jobs=jobs)
+    else:
+        return render_template('search.html',jobs=jobs)
 
 @main_bp.route('/search/search_detail/<int:job_id>')
 def search_detail(job_id):

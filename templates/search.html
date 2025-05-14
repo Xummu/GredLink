@@ -119,13 +119,37 @@
       margin-bottom: 4px;
     }
   </style>
+   <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const input = document.getElementById('searchInput');
+    const cards = document.querySelectorAll('.news-card');
+    const noResults = document.getElementById('noResults');
+
+    input.addEventListener('input', function () {
+      const keyword = input.value.toLowerCase();
+      let matchCount = 0;
+
+      cards.forEach(card => {
+        const title = card.querySelector('.news-text strong').innerText.toLowerCase();
+        if (title.includes(keyword)) {
+          card.style.display = 'flex';
+          matchCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      noResults.style.display = (matchCount === 0) ? 'block' : 'none';
+    });
+  });
+</script>
 </head>
 <body>
   <div class="top-bar">
-    <img src="{{url_for('static',filename='img/search_logo.png')}}" alt="로고" height="30" />
+    <img src="{{url_for('static',filename='img/search_logo.png')}}" height="30"/>
     <div class="search-box">
       <img src="{{url_for('static',filename='img/news_search_icon.png')}}" alt="검색" width="16" />
-      <input type="text" placeholder="검색어 입력" />
+      <input type="text" id="searchInput" placeholder="검색어 입력" />
     </div>
   </div>
 
@@ -133,13 +157,16 @@
     <!-- 공고 카드 -->
       {% for job in jobs %}
           <div class="news-card">
-      <img src="{{url_for('static',filename=job.image_path or 'img/news_thumb.jpg')}}" alt="썸네일" />
+      <img src="{{url_for('static',filename=job.image_path or 'img/news_thumb.jpg')}}"  alt="썸네일" />
       <div class="news-text">
         <p><strong>{{ job.title }}</strong><br />{{ job.location }} · {{ job.salary }}</p>
         <a href="{{ url_for('main.search_detail', job_id=job.id) }}">자세히 보기</a>
       </div>
     </div>
     {% endfor %}
+  <div id="noResults" class="text-center text-muted my-3" style="display: none;">
+  일치하는 결과가 없습니다.
+</div>
   </div>
 
  <div class="bottom-nav">
@@ -155,10 +182,23 @@
       <img src="{{url_for('static',filename='img/chat.png')}}" alt="채팅" />
       채팅
     </a>
-    <a href="{{url_for('main.user_profile')}}" style="text-decoration: none;color: black;font-weight: bold">
-      <img src="{{url_for('static',filename='img/my.png')}}" alt="MY" />
-      MY
-    </a>
+    {% if role == 'admin' %}
+        <a href="{{url_for('admin.dashboard')}}" style="text-decoration: none;color: black;font-weight: bold">
+        <img src="{{url_for('static',filename='img/my.png')}}" alt="MY" />
+        MY
+        </a>
+
+     {% elif role == 'buser' %}
+        <a href="{{url_for('buser.dashboard')}}" style="text-decoration: none;color: black;font-weight: bold">
+        <img src="{{url_for('static',filename='img/my.png')}}" alt="MY" />
+        MY
+        </a>
+     {% else %}
+        <a href="{{url_for('main.user_profile')}}" style="text-decoration: none;color: black;font-weight: bold">
+        <img src="{{url_for('static',filename='img/my.png')}}" alt="MY" />
+        MY
+        </a>
+     {% endif %}
   </div>
 </body>
 </html>
