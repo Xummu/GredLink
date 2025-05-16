@@ -9,6 +9,7 @@ from models.carousel import Carousel
 from models.user import User
 from extensions import db
 from models.news import News
+from models.visit import VisitCounter
 
 admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
 
@@ -156,9 +157,12 @@ def user_update():
 @admin_required
 def count():
     user_count = User.query.filter_by(is_delete=False).count()
-
-    visit_count = 123
-    return render_template('admin/count.html', user_count=user_count, visit_count=visit_count)
+    counter = VisitCounter.query.get(1)
+    if counter:
+        visiter = counter
+    else:
+        visiter = 0
+    return render_template('admin/count.html', user_count=user_count, visit_count=visiter.count)
 
 
 @admin_bp.route('/home_edit',methods=['GET','POST'])

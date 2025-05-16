@@ -168,6 +168,9 @@
 
 
     <!-- 뉴스 카드 -->
+    <div class="text-center text-muted mt-5">
+            <p>방문: 2025년 5월 16일 부터 {{ counter.count }}인</p>
+        </div>
     {% if news_list %}
         {% for item in news_list %}
         <div class="news-card" data-search="{{ item.title }}">

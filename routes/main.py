@@ -13,6 +13,7 @@ from models.news import News
 from models.job import Job
 from models.viewed_job import ViewedJob
 from models.chat import ChatRelation,Message
+from models.visit import VisitCounter
 
 main_bp = Blueprint('main', __name__)
 
@@ -22,12 +23,22 @@ def index():
 
 @main_bp.route('/home')
 def home():
+
+    counter = VisitCounter.query.get(1)
+    if not counter:
+        counter = VisitCounter(id=1,count=1)
+        db.session.add(counter)
+    else:
+        counter.count += 1
+    db.session.commit()
+
     carousels = Carousel.query.all()
     news_list = News.query.order_by(News.created_at.desc()).all()
+
     if current_user.is_authenticated:
-        return render_template('home.html', role=current_user.role, images=carousels, news_list=news_list)
+        return render_template('home.html', role=current_user.role, images=carousels, news_list=news_list,counter=counter)
     else:
-        return render_template('home.html', images=carousels,news_list=news_list)
+        return render_template('home.html', images=carousels,news_list=news_list,counter=counter)
 
 
 @main_bp.route('/home/new_detail/<int:news_id>')
